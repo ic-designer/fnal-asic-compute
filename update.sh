@@ -2,8 +2,9 @@
 
 # define the file list
 src_dst_pairs=(
-    common/bashrc   .bashrc
-    ssh/config      .ssh/config
+    common/bash_profile     .bash_profile
+    common/bashrc           .bashrc
+    ssh/config              .ssh/config
 )
 
 # initialize the flags and parse the command line arguments
