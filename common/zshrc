@@ -4,5 +4,5 @@ alias ls='ls --color'
 alias ll='ls -al'
 alias kload='kinit -ft ~/.kerberos/${USERNAME}.keytab ${USERNAME}@FNAL.GOV && klist'
 
-export PATH=$PATH:.
+export PATH=$PATH:~/bin:.
 export KRB5_CONFIG=~/.kerebos/krb5.conf
