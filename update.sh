@@ -4,6 +4,7 @@
 src_dst_pairs=(
     common/zshrc            .zshrc
     kerberos/krb5.conf      .kerberos/krb5.conf
+    kerberos/krb5.cc        .kerberos/krb5.cc
     ssh/config              .ssh/config
 )
 
