@@ -3,6 +3,7 @@
 # define the file list
 src_dst_pairs=(
     common/zshrc            .zshrc
+    kerberos/krb5.conf      .kerberos/krb5.conf
     ssh/config              .ssh/config
 )
 
