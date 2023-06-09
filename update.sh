@@ -10,7 +10,6 @@ src_dst_pairs=(
 flag_dry_run=false
 flag_trace=false
 
-
 while [[ $# -gt 0 ]]; do
     case $1 in
         --dry-run)
@@ -27,10 +26,11 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
+
+# execute the script
+echo "Starting Script..."
+echo
 (
-    # execute the script
-    echo "Starting Script..."
-    echo
     set -e
 
     case $flag_trace in
@@ -51,10 +51,11 @@ done
     backup_path=`$cmd mktemp -d`
     for (( i=0; i<${#src_dst_pairs[@]} ; i+=2  )) ; do
         target="${src_dst_pairs[i+2]}"
-
         src=~/$target
         dst=${backup_path}/${target}
-        $cmd mkdir -p `dirname ${dst}`
+
+        $cmd mkdir -p $(dirname $src) && $cmd touch $src
+        $cmd mkdir -p $(dirname $dst) && $cmd touch $dst
         $cmd cp $src ${dst}
     done
     $cmd find ${backup_path}
