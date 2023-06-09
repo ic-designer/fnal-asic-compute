@@ -1,0 +1,8 @@
+# .basrc for jfreden
+
+alias ls='ls --color'
+alias ll='ls -al'
+
+export PATH=$PATH:.
+export KRB5CCNAME=~/.kerebos/krb5cc
+export KRB5_CONFIG=~/.kerebos/krb5.conf

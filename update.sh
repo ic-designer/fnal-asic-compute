@@ -2,8 +2,7 @@
 
 # define the file list
 src_dst_pairs=(
-    common/bash_profile     .bash_profile
-    common/bashrc           .bashrc
+    common/zshrc            .zshrc
     ssh/config              .ssh/config
 )
 
@@ -61,7 +60,7 @@ echo
     done
     $cmd find ${backup_path}
     echo
-
+  
     # update the files
     for (( i=0; i<${#src_dst_pairs[@]} ; i+=2  )) ; do
         src="${src_dst_pairs[i+1]}"
@@ -69,7 +68,7 @@ echo
         $cmd ln -sf `realpath $src` ~/$dst
     done
 
-    $cmd find ${backup_path}
+    $cmd find ${backup_path} -type f
 )
 
 

@@ -1,6 +1,0 @@
-# .basrc for jfreden
-
-alias ls='ls --color'
-alias ll='ls -al'
-
-export PATH=$PATH:.
