@@ -6,8 +6,9 @@ src_dst_pairs=(
     kerberos/krb5.conf      .kerberos/krb5.conf
     kerberos/krb5.cc        .kerberos/krb5.cc
     ssh/config              .ssh/config
-    bin/open-tunnel.sh      bin/open-tunnel.sh
-    bin/setup-vnc.sh        bin/setup-vnc.sh
+    bin/krbtools-keytab     bin/krbtools-keytab
+    bin/vnctools-tunnel     bin/vnctools-tunnel
+    bin/vnctools-create     bin/vnctools-create
 )
 
 # initialize the flags and parse the command line arguments
