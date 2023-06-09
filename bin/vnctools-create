@@ -13,8 +13,8 @@ while [[ $# -gt 0 ]]; do
             hostname="${1#*=}"
             shift
             ;;
-        --address=*)
-            address="${1#*=}"
+        --display=*)
+            display="${1#*=}"
             shift
             ;;
         *)
@@ -26,10 +26,10 @@ done
 
 username=${username:?"Error. username not define"}
 hostname=${hostname:?"Error. hostname not define"}
-address=${address:?"Error. address not define"}
+display=${display:?"Error. display not define"}
 
 (
     set -x
     kinit -ft ~/.kerberos/${username}.keytab ${username}@FNAL.GOV && klist
-    ssh ${username}@${hostname}.fnal.gov "vncserver :${address} -geometry 2560x1440 -localhost ; vncserver -list"
+    ssh ${username}@${hostname}.fnal.gov "vncserver :${display} -geometry 2560x1440 -localhost ; vncserver -list"
 )

@@ -8,13 +8,11 @@ while [[ $# -gt 0 ]]; do
             shift
             ;;
         --hostname=*)
-            echo $1
-            echo ${}
             hostname="${1#*=}"
             shift
             ;;
-        --address=*)
-            address="${1#*=}"
+        --display=*)
+            display="${1#*=}"
             shift
             ;;
         *)
@@ -26,11 +24,11 @@ done
 
 username=${username:?"Error. username not define"}
 hostname=${hostname:?"Error. hostname not define"}
-address=${address:?"Error. address not define"}
+display=${display:?"Error. display not define"}
 
 
 (
     set -x
     kinit -ft ~/.kerberos/${username}.keytab ${username}@FNAL.GOV && klist
-    ssh -C -N -q -K -L 59${address}:localhost:59${address} ${username}@${hostname}.fnal.gov &
+    ssh -C -N -q -K -L 59${display}:localhost:59${display} ${username}@${hostname}.fnal.gov &
 )
