@@ -8,6 +8,7 @@ src_dst_pairs=(
     bin/krbtools-keytab     bin/krbtools-keytab
     bin/vnctools-config     bin/vnctools-config
     bin/vnctools-kill       bin/vnctools-kill
+    bin/vnctools-list       bin/vnctools-list
     bin/vnctools-new        bin/vnctools-new
     bin/vnctools-open       bin/vnctools-open
     vnctools/vnctools-jfreden-fasic-beast1-2694x1440.cfg    .vnctools/vnctools-jfreden-fasic-beast1-2694x1440.cfg
