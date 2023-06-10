@@ -3,14 +3,6 @@
 # parse the command line arguments
 while [[ $# -gt 0 ]]; do
     case $1 in
-        --username=*)
-            username="${1#*=}"
-            shift
-            ;;
-        --hostname=*)
-            hostname="${1#*=}"
-            shift
-            ;;
         --config-file=*)
             config_file="${1#*=}"
             shift
@@ -19,12 +11,27 @@ while [[ $# -gt 0 ]]; do
             display="${1#*=}"
             shift
             ;;
+        --hostname=*)
+            hostname="${1#*=}"
+            shift
+            ;;
+        --username=*)
+            username="${1#*=}"
+            shift
+            ;;
         *)
             echo "Unknown option $1"
             shift
             ;;
     esac
 done
+
+if [[ ! -z ${config_file} ]]; then
+    echo "Loading configuration ${config_file}"
+    cat ${config_file}
+    echo
+    source ${config_file}
+fi
 
 username=${username:?"Error. username not define"}
 hostname=${hostname:?"Error. hostname not define"}

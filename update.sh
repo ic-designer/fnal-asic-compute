@@ -10,6 +10,7 @@ src_dst_pairs=(
     bin/vnctools-kill       bin/vnctools-kill
     bin/vnctools-new        bin/vnctools-new
     bin/vnctools-open       bin/vnctools-open
+    vnctools/vnctools-jfreden-fasic-beast1-2694x1440.cfg    .vnctools/vnctools-jfreden-fasic-beast1-2694x1440.cfg
 )
 
 # initialize the flags and parse the command line arguments

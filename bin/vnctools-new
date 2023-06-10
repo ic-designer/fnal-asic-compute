@@ -30,10 +30,18 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
+if [[ ! -z ${config_file} ]]; then
+    echo "Loading configuration ${config_file}"
+    cat ${config_file}
+    echo
+    source ${config_file}
+fi
+
 username=${username:?"Error. username not define"}
 hostname=${hostname:?"Error. hostname not define"}
 display=${display:?"Error. display not define"}
 geometry=${geometry:=2694x1440}
+
 
 (
     set -x
