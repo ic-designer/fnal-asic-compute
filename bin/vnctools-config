@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+
+# parse the command line arguments
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        --username=*)
+            username="${1#*=}"
+            shift
+            ;;
+        --hostname=*)
+            hostname="${1#*=}"
+            shift
+            ;;
+        --geometry=*)
+            geometry="${1#*=}"
+            shift
+            ;;
+        --config-file=*)
+            config_file="${1#*=}"
+            shift
+            ;;
+        *)
+            echo "Unknown option $1"
+            shift
+            ;;
+    esac
+done
+
+username=${username:?"Error. username not define"}
+hostname=${hostname:?"Error. hostname not define"}
+geometry=${geometry:?"Error. geometry not define"}
+config_file=${config_file:?"Error. config_file not define"}
+
+(
+    set -x
+    mkdir -p `dirname ${config_file}`
+
+cat > ${config_file} << EOF
+username=${username}
+hostname=${hostname}
+geometry=${geometry}
+EOF
+
+) 

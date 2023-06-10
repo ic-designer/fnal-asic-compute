@@ -6,6 +6,7 @@ src_dst_pairs=(
     kerberos/krb5.conf      .kerberos/krb5.conf
     ssh/config              .ssh/config
     bin/krbtools-keytab     bin/krbtools-keytab
+    bin/vnctools-config     bin/vnctools-config
     bin/vnctools-kill       bin/vnctools-kill
     bin/vnctools-new        bin/vnctools-new
     bin/vnctools-open       bin/vnctools-open
