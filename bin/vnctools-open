@@ -27,8 +27,22 @@ hostname=${hostname:?"Error. hostname not define"}
 display=${display:?"Error. display not define"}
 
 
+clean_up () {
+    for job in `jobs -p`; do
+        kill ${job}
+    done
+}
+
+
 (
     set -x
+    trap "clean_up; exit 1" INT
+
     kinit -ft ~/.kerberos/${username}.keytab ${username}@FNAL.GOV && klist
     ssh -C -N -q -K -L 59${display}:localhost:59${display} ${username}@${hostname}.fnal.gov &
-)
+    
+    sleep 1
+    open -W vnc://localhost:59${display}
+    clean_up
+    wait
+) 

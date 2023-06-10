@@ -8,13 +8,15 @@ while [[ $# -gt 0 ]]; do
             shift
             ;;
         --hostname=*)
-            echo $1
-            echo ${}
             hostname="${1#*=}"
             shift
             ;;
         --display=*)
             display="${1#*=}"
+            shift
+            ;;
+        --geometry=*)
+            geometry="${1#*=}"
             shift
             ;;
         *)
@@ -27,9 +29,15 @@ done
 username=${username:?"Error. username not define"}
 hostname=${hostname:?"Error. hostname not define"}
 display=${display:?"Error. display not define"}
+geometry=${geometry:=2694x1440}
 
 (
     set -x
     kinit -ft ~/.kerberos/${username}.keytab ${username}@FNAL.GOV && klist
-    ssh ${username}@${hostname}.fnal.gov "vncserver :${display} -geometry 2560x1440 -localhost ; vncserver -list"
+    ssh ${username}@${hostname}.fnal.gov \
+        "vncserver :${display} -geometry ${geometry} -localhost 
+        vncserver -list"
 )
+
+
+
