@@ -11,6 +11,7 @@ src_dst_pairs=(
     bin/vnctools-list       bin/vnctools-list
     bin/vnctools-new        bin/vnctools-new
     bin/vnctools-open       bin/vnctools-open
+    bin/vnctools-opts       bin/vnctools-opts    
     vnctools/vnctools-jfreden-fasic-beast1-2694x1440.cfg    .vnctools/vnctools-jfreden-fasic-beast1-2694x1440.cfg
 )
 

@@ -1,41 +1,10 @@
 #!/usr/bin/env bash
 
 # parse the command line arguments
-while [[ $# -gt 0 ]]; do
-    case $1 in
-        --config-file=*)
-            config_file="${1#*=}"
-            shift
-            ;;
-        --display=*)
-            display="${1#*=}"
-            shift
-            ;;
-        --hostname=*)
-            hostname="${1#*=}"
-            shift
-            ;;
-        --username=*)
-            username="${1#*=}"
-            shift
-            ;;
-        *)
-            echo "Unknown option $1"
-            shift
-            ;;
-    esac
-done
-
-if [[ ! -z ${config_file} ]]; then
-    echo "Loading configuration ${config_file}"
-    cat ${config_file}
-    echo
-    source ${config_file}
-fi
-
-username=${username:?"Error. username not define"}
-hostname=${hostname:?"Error. hostname not define"}
-display=${display:?"Error. display not define"}
+source `which vnctools-opts` $@
+display=${display:?"Error. display not defined."}
+hostname=${hostname:?"Error. hostname not defined."}
+username=${username:?"Error. username not defined."}
 
 (
     set -x

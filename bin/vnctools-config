@@ -1,38 +1,13 @@
 #!/usr/bin/env bash
 
-# parse the command line arguments
-while [[ $# -gt 0 ]]; do
-    case $1 in
-        --config-file=*)
-            config_file="${1#*=}"
-            shift
-            ;;
-        --geometry=*)
-            geometry="${1#*=}"
-            shift
-            ;;
-        --hostname=*)
-            hostname="${1#*=}"
-            shift
-            ;;
-        --username=*)
-            username="${1#*=}"
-            shift
-            ;;
-        *)
-            echo "Unknown option $1"
-            shift
-            ;;
-    esac
-done
-
-username=${username:?"Error. username not define"}
-hostname=${hostname:?"Error. hostname not define"}
-geometry=${geometry:?"Error. geometry not define"}
-config_file=${config_file:?"Error. config_file not define"}
+source `which vnctools-opts` $@
+config_file=${config_file:?"Error. config_file not defined."}
+display=${display:?"Error. display not defined."}
+hostname=${hostname:?"Error. hostname not defined."}
+username=${username:?"Error. username not defined."}
 
 (
-    set -x
+    set -xu
     mkdir -p `dirname ${config_file}`
 
 cat > ${config_file} << EOF

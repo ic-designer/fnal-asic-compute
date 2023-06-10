@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+# parse the command line arguments
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        --config-file=*)
+            config_file="${1#*=}"
+            shift
+            ;;
+        --display=*)
+            display="${1#*=}"
+            shift
+            ;;
+        --geometry=*)
+            geometry="${1#*=}"
+            shift
+            ;;
+        --hostname=*)
+            hostname="${1#*=}"
+            shift
+            ;;
+        --username=*)
+            username="${1#*=}"
+            shift
+            ;;
+        *)
+            echo "Unknown option $1"
+            shift
+            ;;
+    esac
+done
+
+if [[ ! -z ${config_file} ]]; then
+    echo "Loading configuration ${config_file}"
+    cat ${config_file}
+    echo
+    source ${config_file}
+fi
