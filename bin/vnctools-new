@@ -3,12 +3,8 @@
 # parse the command line arguments
 while [[ $# -gt 0 ]]; do
     case $1 in
-        --username=*)
-            username="${1#*=}"
-            shift
-            ;;
-        --hostname=*)
-            hostname="${1#*=}"
+        --config-file=*)
+            config_file="${1#*=}"
             shift
             ;;
         --display=*)
@@ -17,6 +13,14 @@ while [[ $# -gt 0 ]]; do
             ;;
         --geometry=*)
             geometry="${1#*=}"
+            shift
+            ;;
+        --hostname=*)
+            hostname="${1#*=}"
+            shift
+            ;;
+        --username=*)
+            username="${1#*=}"
             shift
             ;;
         *)

@@ -11,6 +11,10 @@ while [[ $# -gt 0 ]]; do
             hostname="${1#*=}"
             shift
             ;;
+        --config-file=*)
+            config_file="${1#*=}"
+            shift
+            ;;
         --display=*)
             display="${1#*=}"
             shift
