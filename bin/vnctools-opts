@@ -25,6 +25,7 @@ while [[ $# -gt 0 ]]; do
             ;;
         *)
             echo "Unknown option $1"
+            return 1 2>/dev/null; exit 1;
             shift
             ;;
     esac
