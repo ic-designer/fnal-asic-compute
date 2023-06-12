@@ -37,3 +37,4 @@ if [[ ! -z ${config_file} ]]; then
     echo
     source ${config_file}
 fi
+username=${username:=$(whoami)}
