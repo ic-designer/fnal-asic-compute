@@ -3,6 +3,7 @@ Host *.fnal.gov
     GSSAPIDelegateCredentials yes
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
+    ForwardAgent yes
     ForwardX11 yes
     ForwardX11Trusted yes
 
