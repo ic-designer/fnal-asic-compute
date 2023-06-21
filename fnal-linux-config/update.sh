@@ -4,6 +4,7 @@
 src_dst_pairs=(
     common/bashrc           .bashrc
     common/bash_profile     .bash_profile
+    ssh/config              .ssh/config
 )
 
 # initialize the flags and parse the command line arguments
