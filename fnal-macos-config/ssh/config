@@ -1,4 +1,4 @@
-Host *.fnal.gov    
+Host *.fnal.gov
     GSSAPIAuthentication yes
     GSSAPIDelegateCredentials yes
     StrictHostKeyChecking no

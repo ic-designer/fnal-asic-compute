@@ -11,7 +11,7 @@ src_dst_pairs=(
     bin/vnctools-list       bin/vnctools-list
     bin/vnctools-new        bin/vnctools-new
     bin/vnctools-open       bin/vnctools-open
-    bin/vnctools-opts       bin/vnctools-opts    
+    bin/vnctools-opts       bin/vnctools-opts
     vnctools/vnctools-fasic-beast1-2694x1440.cfg    .vnctools/vnctools-fasic-beast1-2694x1440.cfg
     vnctools/vnctools-fasic-beast2-2694x1440.cfg    .vnctools/vnctools-fasic-beast2-2694x1440.cfg
 )
@@ -26,10 +26,6 @@ while [[ $# -gt 0 ]]; do
             flag_dry_run=true
             shift
             ;;
-        --trace)
-            flag_trace=true
-            shift
-            ;;
         *)
             shift
             ;;
@@ -41,14 +37,8 @@ done
 echo "Starting Script..."
 echo
 (
-    set -e
+    set -ex
 
-    case $flag_trace in
-        true)   set -x;;
-        false)  set +x;;
-        *) echo "Error with trace option"; exit 1;;
-    esac
-    
     case $flag_dry_run in
         true)   cmd='echo';;
         false)  cmd='';;
@@ -64,13 +54,15 @@ echo
         src=~/$target
         dst=${backup_path}/${target}
 
-        $cmd mkdir -p $(dirname $src) && $cmd touch $src
-        $cmd mkdir -p $(dirname $dst) && $cmd touch $dst
-        $cmd cp $src ${dst}
+        if [[ -f ${src} ]]; then
+            $cmd mkdir -p $(dirname $src) && $cmd touch $src
+            $cmd mkdir -p $(dirname $dst) && $cmd touch $dst
+            $cmd cp $src ${dst}
+        fi
     done
     $cmd find ${backup_path}
     echo
-  
+
     # update the files
     for (( i=0; i<${#src_dst_pairs[@]} ; i+=2  )) ; do
         src="${src_dst_pairs[i+1]}"
@@ -80,7 +72,3 @@ echo
 
     $cmd find ${backup_path} -type f
 )
-
-
-
-
