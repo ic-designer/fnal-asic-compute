@@ -1,0 +1,72 @@
+#!/usr/bin/env bash
+
+# define the file list
+src_dst_pairs=(
+    common/bashrc           .bashrc
+    common/bash_profile     .bash_profile
+)
+
+# initialize the flags and parse the command line arguments
+flag_dry_run=false
+flag_trace=false
+
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        --dry-run)
+            flag_dry_run=true
+            shift
+            ;;
+        --trace)
+            flag_trace=true
+            shift
+            ;;
+        *)
+            shift
+            ;;
+    esac
+done
+
+
+# execute the script
+echo "Starting Script..."
+echo
+(
+    set -e
+
+    case $flag_dry_run in
+        true)   cmd='echo';;
+        false)  cmd='';;
+        *) echo "Error with dry-run option"; exit 1;;
+    esac
+
+    case $flag_trace in
+        true)   set -x;;
+        false)  set +x;;
+        *) echo "Error with trace option"; exit 1;;
+    esac
+
+    # backup all the files
+    echo "Backing up files..."
+    backup_path=`$cmd mktemp -d`
+    for (( i=0; i<${#src_dst_pairs[@]} ; i+=2  )) ; do
+        target="${src_dst_pairs[i+1]}"
+        src=~/$target
+
+        if [[ -f ${src} ]]; then
+            dst=${backup_path}/${target}
+            $cmd mkdir -p $(dirname $dst) && $cmd touch $dst
+            $cmd cp $src ${dst}
+        fi
+    done
+    $cmd find ${backup_path}
+    echo
+
+    # update the files
+    for (( i=0; i<${#src_dst_pairs[@]} ; i+=2  )) ; do
+        src="${src_dst_pairs[i+0]}"
+        dst="${src_dst_pairs[i+1]}"
+        $cmd ln -sf `realpath $src` ~/$dst
+    done
+
+    $cmd find ${backup_path} -type f
+)
