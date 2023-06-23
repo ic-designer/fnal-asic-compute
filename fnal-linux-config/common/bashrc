@@ -23,19 +23,25 @@ pathmunge .
 
 
 # get current branch in git repo
+function parse_git_prompt() {
+    local branch=$(parse_git_branch)
+    if [[ ! ${branch} == "" ]]; then
+        echo "[$(parse_git_remote):${branch}$(parse_git_status)] "
+    else
+        echo ""
+    fi
+}
+
 function parse_git_branch() {
-	BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
-	if [ ! "${BRANCH}" == "" ]
-	then
-		STAT=`parse_git_dirty`
-		echo "[${BRANCH}${STAT}]"
-	else
-		echo ""
-	fi
+	git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
+}
+
+function parse_git_remote() {
+	git remote -v 2> /dev/null | sed -n -e 's/origin.*\:\(.*\) .*(fetch).*/\1/p'
 }
 
 # get current status of git repo
-function parse_git_dirty {
+function parse_git_status {
 	status=`git status 2>&1 | tee`
 	dirty=`echo -n "${status}" 2> /dev/null | grep "modified:" &> /dev/null; echo "$?"`
 	untracked=`echo -n "${status}" 2> /dev/null | grep "Untracked files" &> /dev/null; echo "$?"`
@@ -69,4 +75,9 @@ function parse_git_dirty {
 	fi
 }
 
-export PS1="[\!] \e[0;34m\u@\h\e[0;32m\$(parse_git_branch) \e[1;34m\W\e[m -: "
+
+COLOR_DEF=$'\[\e[0m\]'
+COLOR_USR=$'\[\e[38;5;243m\]'
+COLOR_DIR=$'\[\e[38;5;197m\]'
+COLOR_GIT=$'\[\e[38;5;022m\]'
+export PS1="[\!] ${COLOR_USR}\u@\h ${COLOR_GIT}\$(parse_git_prompt)${COLOR_DIR}\W${COLOR_DEF} -: "
