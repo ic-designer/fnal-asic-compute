@@ -77,8 +77,8 @@ function __main__() {
             local dst=${backup_path}/${b}
 
             if [[ -f ${src} ]]; then
-                $cmd mkdir -p $(dirname $dst)
-                $cmd cp $src ${dst}
+                $cmd mkdir -p $(dirname ${dst})
+                $cmd cp ${src} ${dst}
             fi
         done < <(echo $config_files | xargs -n2)
         $cmd find ${backup_path}
@@ -87,7 +87,11 @@ function __main__() {
 
         # update the files
         while read -r a b; do
-            $cmd ln -sf `realpath ${config_path}/${a}` ~/${b}
+            local src=$(realpath ${config_path}/${a})
+            local dst=~/${b}
+
+            $cmd mkdir -p $(dirname ${dst})
+            $cmd ln -sf ${src} ${dst}
         done < <(echo $config_files | xargs -n2)
         unset config_files
 
