@@ -92,7 +92,7 @@ function __main__() {
 
             $cmd mkdir -p $(dirname ${dst})
             $cmd ln -sf ${src} ${dst}
-        done < <(echo $config_files | xargs -n2)
+        done < <(echo ${config_files[@]} | xargs -n2)
         unset config_files
 
         $cmd find ${backup_path} -type f
