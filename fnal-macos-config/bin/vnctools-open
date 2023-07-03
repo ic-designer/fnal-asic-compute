@@ -16,10 +16,11 @@ clean_up () {
     trap "clean_up; exit 1" INT
 
     kinit -ft ~/.kerberos/${username}.keytab ${username}@FNAL.GOV && klist
-    ssh -C -N -q -K -L 59${display}:localhost:59${display} ${username}@${hostname}.fnal.gov &
-    
+    ssh -4CKNq -L 59${display}:localhost:59${display} ${username}@${hostname}.fnal.gov &
+
     sleep 1
-    open -W vnc://localhost:59${display}
+    # open -W vnc://localhost:59${display}
+    /Applications/VNC\ Viewer.app/Contents/MacOS/vncviewer localhost:5949
     clean_up
     wait
-) 
+)
