@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+(
+    source `which vnctools-opts` $@
+    display=${display:?"Error. display not define"}
+    geometry=${geometry:=2692x1440}
+    hostname=${hostname:?"Error. hostname not define"}
+    username=${username:?"Error. username not define"}
+
+
+    set -x
+    kinit -ft ~/.kerberos/${username}.keytab ${username}@FNAL.GOV && klist
+    ssh ${username}@${hostname}.fnal.gov \
+        "vncserver :${display} \
+            -geometry ${geometry} \
+            -depth 16 \
+            -localhost
+        vncserver -list"
+)
