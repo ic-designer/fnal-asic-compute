@@ -37,6 +37,7 @@ function parse_git_branch() {
 }
 
 function parse_git_remote() {
+	## TODO fix so that it works will local and remote repos. The ':' is the issue
 	git remote -v 2> /dev/null | sed -n -e 's/origin.*\:\(.*\) .*(fetch).*/\1/p'
 }
 
