@@ -26,7 +26,7 @@ pathmunge .
 function parse_git_prompt() {
     local branch=$(parse_git_branch)
     if [[ ! ${branch} == "" ]]; then
-        echo "[$(parse_git_remote):${branch}$(parse_git_status)] "
+        echo "[$(parse_git_remote):${branch}] "
     else
         echo ""
     fi
