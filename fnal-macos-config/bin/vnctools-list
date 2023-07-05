@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-source `which vnctools-opts` $@
-hostname=${hostname:?"Error. hostname not defined."}
-username=${username:?"Error. username not defined."}
-
 (
+    source `which vnctools-opts` $@
+    hostname=${hostname:?"Error. hostname not defined."}
+    username=${username:?"Error. username not defined."}
+
     set -x
     kinit -ft ~/.kerberos/${username}.keytab ${username}@FNAL.GOV && klist
     ssh ${username}@${hostname}.fnal.gov "vncserver -list"

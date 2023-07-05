@@ -1,26 +1,35 @@
 #!/usr/bin/env bash
 
-source `which vnctools-opts` $@
-display=${display:?"Error. display not define"}
-hostname=${hostname:?"Error. hostname not define"}
-username=${username:?"Error. username not define"}
-
-clean_up () {
-    for job in `jobs -p`; do
-        kill ${job}
-    done
-}
-
 (
+    source `which vnctools-opts` $@
+    display=${display:?"Error. display not define"}
+    hostname=${hostname:?"Error. hostname not define"}
+    username=${username:?"Error. username not define"}
+
+    clean_up () {
+        for job in `jobs -p`; do
+            kill ${job}
+        done
+    }
+
     set -x
     trap "clean_up; exit 1" INT
 
     kinit -ft ~/.kerberos/${username}.keytab ${username}@FNAL.GOV && klist
-    ssh -4CKNq -L 59${display}:localhost:59${display} ${username}@${hostname}.fnal.gov &
+    ssh  -4CKq -L 5900:localhost:5900  ${username}@${hostname}.fnal.gov \
+        'x11vnc -display :49 -localhost -usepw -once -noxdamage -snapfb -speeds dsl -shared' &
+    sleep 4
+    /Applications/VNC\ Viewer.app/Contents/MacOS/vncviewer localhost:5900
+    # open -W vnc://localhost:5900
 
-    sleep 1
+
+    # Orginal version that was super laggy
+    # ssh -4CKNq -L 59${display}:localhost:59${display} ${username}@${hostname}.fnal.gov &
+    # sleep 1
     # open -W vnc://localhost:59${display}
-    /Applications/VNC\ Viewer.app/Contents/MacOS/vncviewer localhost:5949
+    # /Applications/VNC\ Viewer.app/Contents/MacOS/vncviewer localhost:5949 \
+    #     -Quality Low \
+    #     -ScalingQuality 1
     clean_up
     wait
 )
