@@ -22,6 +22,12 @@ pathmunge /asic/cad/vscode/VSCode-linux-x64/bin
 pathmunge .
 
 
+# Eliminate Hotkeys needed better used within Cadence
+gsettings set org.cinnamon.desktop.keybindings.wm switch-group [] > /dev/null 2>&1
+gsettings set org.gnome.desktop.wm.keybindings switch-group [] > /dev/null 2>&1
+gsettings set org.gnome.desktop.wm.keybindings switch-group-backwards [] > /dev/null 2>&1
+
+
 # get current branch in git repo
 function parse_git_prompt() {
     local branch=$(parse_git_branch)
