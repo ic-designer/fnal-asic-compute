@@ -17,7 +17,7 @@
 
     kinit -ft ~/.kerberos/${username}.keytab ${username}@FNAL.GOV && klist
     ssh  -4CKq -L 5900:localhost:5900  ${username}@${hostname}.fnal.gov \
-        'x11vnc -display :49 -localhost -usepw -once -noxdamage -snapfb -speeds dsl -shared' &
+        "x11vnc -display :${display} -localhost -usepw -once -noxdamage -snapfb -speeds dsl -shared" &
     sleep 4
     /Applications/VNC\ Viewer.app/Contents/MacOS/vncviewer localhost:5900
     # open -W vnc://localhost:5900
