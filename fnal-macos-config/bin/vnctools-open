@@ -18,18 +18,20 @@
     kinit -ft ~/.kerberos/${username}.keytab ${username}@FNAL.GOV && klist
     ssh  -4CKq -L 5900:localhost:5900  ${username}@${hostname}.fnal.gov \
         "x11vnc -display :${display} -localhost -usepw -once -noxdamage -snapfb -speeds dsl -shared" &
+
     sleep 4
-    /Applications/VNC\ Viewer.app/Contents/MacOS/vncviewer localhost:5900
-    # open -W vnc://localhost:5900
+    case true in
+        ${flag_realvnc:=})
+            /Applications/VNC\ Viewer.app/Contents/MacOS/vncviewer localhost:5900
+            ;;
+        ${screenshare:=})
+            open -W vnc://localhost:5900
+            ;;
+        *)
+            open -W vnc://localhost:5900
+            ;;
+    esac
 
-
-    # Orginal version that was super laggy
-    # ssh -4CKNq -L 59${display}:localhost:59${display} ${username}@${hostname}.fnal.gov &
-    # sleep 1
-    # open -W vnc://localhost:59${display}
-    # /Applications/VNC\ Viewer.app/Contents/MacOS/vncviewer localhost:5949 \
-    #     -Quality Low \
-    #     -ScalingQuality 1
     clean_up
     wait
 )

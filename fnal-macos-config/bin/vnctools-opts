@@ -23,6 +23,14 @@ while [[ $# -gt 0 ]]; do
             username="${1#*=}"
             shift
             ;;
+        --realvnc)
+            flag_realvnc=true;
+            shift
+            ;;
+        --screenshare)
+            flag_screenshare=true;
+            shift
+            ;;
         *)
             echo "Unknown option $1"
             return 1 2>/dev/null; exit 1;
