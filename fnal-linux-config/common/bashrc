@@ -47,7 +47,6 @@ function deprecate_rm() {
 	return 2
 }
 
-
 # get current branch in git repo
 function parse_git_prompt() {
     local branch=$(parse_git_branch)
