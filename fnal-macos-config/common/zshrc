@@ -12,7 +12,7 @@ function parse_git_branch () {
 }
 
 function parse_git_remote () {
-    git remote -v 2> /dev/null | sed -n -e 's/origin.*\:\(.*\) .*(fetch).*/\1/p'
+   git remote -v 2> /dev/null | sed -n -e 's/origin\s*\(.*\:\)*\(.*\) .*(fetch).*/\2/p'
 }
 
 function parse_git_prompt () {
