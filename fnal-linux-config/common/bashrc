@@ -3,7 +3,7 @@
 
 # Aliases
 alias grep='grep --color=auto'
-alias ls='ls --color=auto'
+alias ls='ls -h --color=auto'
 alias ll='ls -al'
 alias mv='mv -i'
 alias rm='rm -i'
@@ -43,8 +43,7 @@ function parse_git_branch() {
 }
 
 function parse_git_remote() {
-	## TODO fix so that it works will local and remote repos. The ':' is the issue
-	git remote -v 2> /dev/null | sed -n -e 's/origin.*\:\(.*\) .*(fetch).*/\1/p'
+	git remote -v 2> /dev/null | sed -n -e 's/origin\s*\(.*\:\)*\(.*\) .*(fetch).*/\2/p'
 }
 
 # get current status of git repo
