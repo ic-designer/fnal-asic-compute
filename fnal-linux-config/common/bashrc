@@ -1,12 +1,15 @@
 # .bashrc for jfreden@fnal.gov
 
+# Setup Trash
+export TRASH=${HOME}/.local/share/Trash
 
 # Aliases
 alias grep='grep --color=auto'
 alias ls='ls -h --color=auto'
 alias ll='ls -al'
 alias mv='mv -i'
-alias rm='rm -i'
+alias rm="deprecate_rm"
+alias del='\mkdir -p ${TRASH}; \mv --backup=t -t ${TRASH} $@'
 
 # Paths
 pathmunge () {
@@ -26,6 +29,15 @@ pathmunge .
 gsettings set org.cinnamon.desktop.keybindings.wm switch-group [] > /dev/null 2>&1
 gsettings set org.gnome.desktop.wm.keybindings switch-group [] > /dev/null 2>&1
 gsettings set org.gnome.desktop.wm.keybindings switch-group-backwards [] > /dev/null 2>&1
+
+
+# Provide depracation warning with bad return code
+function deprecate_rm() {
+	echo "bash: rm: use 'del' command instead."
+	alias del
+	echo ""
+	return 2
+}
 
 
 # get current branch in git repo
