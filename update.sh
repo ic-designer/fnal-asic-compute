@@ -72,7 +72,7 @@ function __main__() {
         # backup all the files
         echo "Backing up files..."
         local backup_path=`$cmd mktemp -d`
-        while read -r a b; do
+        while read -t 1 -r a b; do
             local src=~/${b}
             local dst=${backup_path}/${b}
 
@@ -86,7 +86,7 @@ function __main__() {
 
 
         # update the files
-        while read -r a b; do
+        while read -t 1 -r a b; do
             local src=$(realpath ${config_path}/${a})
             local dst=~/${b}
 
