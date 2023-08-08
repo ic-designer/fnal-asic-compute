@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+(
+    set -euxo pipefail
+
+    if [[ -z "${PYENV_ROOT+_}" ]]; then
+        export PYENV_ROOT=${HOME}/.local/lib/pyenv
+    fi
+    curl https://pyenv.run | bash
+)
