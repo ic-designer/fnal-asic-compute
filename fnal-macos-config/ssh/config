@@ -1,11 +1,13 @@
 Host *.fnal.gov
-    GSSAPIAuthentication yes
-    GSSAPIDelegateCredentials yes
-    StrictHostKeyChecking no
-    UserKnownHostsFile /dev/null
     ForwardAgent yes
     ForwardX11 yes
     ForwardX11Trusted yes
+    GSSAPIAuthentication yes
+    GSSAPIDelegateCredentials yes
+    LocalCommand kinit -ft ~/.kerberos/${USER}.keytab ${USER}@FNAL.GOV && klist
+    PermitLocalCommand yes
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
 
 Host github.com
   AddKeysToAgent yes
