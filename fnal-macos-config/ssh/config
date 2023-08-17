@@ -6,6 +6,8 @@ Host *.fnal.gov
     GSSAPIDelegateCredentials yes
     LocalCommand kinit -ft ~/.kerberos/${USER}.keytab ${USER}@FNAL.GOV && klist
     PermitLocalCommand yes
+    ServerAliveCountMax 10
+    ServerAliveInterval 300
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
