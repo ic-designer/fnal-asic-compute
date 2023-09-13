@@ -66,7 +66,10 @@ function __main__() {
 
         # read the setup file
         source ${setup_filepath}
-        local config_files=${config_files:?"Error. config-files not defined in setup file"}
+        if [ -z "${config_files}" ]; then
+            echo "Error. config-files not defined in setup file"
+            exit 1
+        fi
 
 
         # backup all the files
@@ -80,8 +83,8 @@ function __main__() {
                 $cmd mkdir -p $(dirname ${dst})
                 $cmd cp ${src} ${dst}
             fi
-        done < <(echo $config_files | xargs -n2)
-        $cmd find ${backup_path}
+        done < <(echo ${config_files[@]} | xargs -n2)
+        $cmd find ${backup_path} -type f
         echo
 
 
@@ -94,8 +97,6 @@ function __main__() {
             $cmd ln -sf ${src} ${dst}
         done < <(echo ${config_files[@]} | xargs -n2)
         unset config_files
-
-        $cmd find ${backup_path} -type f
     )
 }
 
