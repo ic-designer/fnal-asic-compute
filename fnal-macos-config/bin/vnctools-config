@@ -16,4 +16,4 @@ hostname=${hostname}
 geometry=${geometry}
 EOF
 
-) 
+)
