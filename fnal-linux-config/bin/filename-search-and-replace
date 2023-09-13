@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+(
+    set -euxo pipefail
+
+    target=$1
+    old=$2
+    new=$3
+
+    echo "${target} : '${old}' -> '${new}'"
+    if [[ -f ${target} ]]; then
+        echo ${target} | sed "p;s/${old}/${new}/" | xargs -n2 mv
+    else
+        echo "ERROR: target not found: ${target}"
+        exit 1
+    fi
+)
