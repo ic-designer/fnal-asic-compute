@@ -33,7 +33,7 @@ if [[ -d $PYENV_ROOT ]]; then
 fi
 
 
-# Eliminate Hotkeys needed better used within Cadence
+# Improve usability of Cadence tools
 gsettings set org.cinnamon.desktop.keybindings.wm switch-group [] > /dev/null 2>&1
 gsettings set org.gnome.desktop.wm.keybindings switch-group [] > /dev/null 2>&1
 gsettings set org.gnome.desktop.wm.keybindings switch-group-backwards [] > /dev/null 2>&1
