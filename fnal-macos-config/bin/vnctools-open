@@ -4,6 +4,7 @@
     source `which vnctools-opts` $@
     display=${display:?"Error. display not define"}
     hostname=${hostname:?"Error. hostname not define"}
+    localport=${localport:=5900}
     username=${username:?"Error. username not define"}
 
     clean_up () {
@@ -16,19 +17,19 @@
     trap "clean_up; exit 1" INT
 
     kinit -ft ~/.kerberos/${username}.keytab ${username}@FNAL.GOV && klist
-    ssh  -4CKq -L 5900:localhost:5900  ${username}@${hostname}.fnal.gov \
+    ssh  -4CKq -L ${localport}:localhost:5900  ${username}@${hostname}.fnal.gov \
         "x11vnc -display :${display} -localhost -usepw -once -noxdamage -snapfb -speeds dsl -shared" &
 
     sleep 4
     case true in
         ${flag_realvnc:=})
-            /Applications/VNC\ Viewer.app/Contents/MacOS/vncviewer localhost:5900
+            /Applications/VNC\ Viewer.app/Contents/MacOS/vncviewer localhost:${localport}
             ;;
         ${screenshare:=})
-            open -W vnc://localhost:5900
+            open -W vnc://localhost:${localport}
             ;;
         *)
-            open -W vnc://localhost:5900
+            open -W vnc://localhost:${localport}
             ;;
     esac
 

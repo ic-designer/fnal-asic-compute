@@ -19,6 +19,10 @@ while [[ $# -gt 0 ]]; do
             hostname="${1#*=}"
             shift
             ;;
+        --localport=*)
+            localport="${1#*=}"
+            shift
+            ;;
         --username=*)
             username="${1#*=}"
             shift
