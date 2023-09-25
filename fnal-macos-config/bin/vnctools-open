@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 (
+    set -euo pipefail
     source `which vnctools-opts` $@
     display=${display:?"Error. display not define"}
     hostname=${hostname:?"Error. hostname not define"}

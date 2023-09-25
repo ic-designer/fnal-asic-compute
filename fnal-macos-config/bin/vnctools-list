@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 (
+    set -euo pipefail
     source `which vnctools-opts` $@
     hostname=${hostname:?"Error. hostname not defined."}
     username=${username:?"Error. username not defined."}

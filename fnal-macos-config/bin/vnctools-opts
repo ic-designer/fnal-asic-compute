@@ -43,7 +43,7 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-if [[ ! -z ${config_file} ]]; then
+if [[ ! -z ${config_file+_} ]]; then
     echo "Loading configuration ${config_file}"
     cat ${config_file}
     echo
