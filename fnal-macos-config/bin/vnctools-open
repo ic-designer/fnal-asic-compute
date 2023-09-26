@@ -19,7 +19,7 @@
 
     kinit -ft ~/.kerberos/${username}.keytab ${username}@FNAL.GOV && klist
     ssh  -4CKq -L ${localport}:localhost:5900  ${username}@${hostname}.fnal.gov \
-        "x11vnc -display :${display} -localhost -usepw -once -noxdamage -snapfb -speeds dsl -shared" &
+        "x11vnc -display :${display} -localhost -usepw -once -noxdamage -snapfb -speeds dsl -shared -repeat" &
 
     sleep 4
     case true in
