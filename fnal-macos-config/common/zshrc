@@ -1,4 +1,6 @@
-# .basrc for jfreden
+# comnon .zshrc
+_ZSHRC_LOCAL=~/.zshrc_local
+
 
 alias ls='ls --color=always'
 alias ll='ls -al'
@@ -31,3 +33,7 @@ COLOR_DIR=$'\e[38;5;197m'
 COLOR_GIT=$'\e[38;5;022m'
 setopt PROMPT_SUBST
 export PROMPT='${COLOR_USR}%n ${COLOR_DIR}%1~ ${COLOR_GIT}$(parse_git_prompt)${COLOR_DEF} $ '
+
+if [[ -f ${_ZSHRC_LOCAL} ]]; then
+    source ${_ZSHRC_LOCAL}
+fi
