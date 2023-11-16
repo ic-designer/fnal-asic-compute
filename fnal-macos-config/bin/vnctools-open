@@ -7,6 +7,7 @@
     hostname=${hostname:?"Error. hostname not define"}
     localport=${localport:=5900}
     username=${username:?"Error. username not define"}
+    extra_args=${extra_args:=""}
 
     clean_up () {
         for job in `jobs -p`; do
@@ -19,9 +20,9 @@
 
     kinit -ft ~/.kerberos/${username}.keytab ${username}@FNAL.GOV && klist
     ssh  -4CKq -L ${localport}:localhost:5900  ${username}@${hostname}.fnal.gov \
-        "x11vnc -display :${display} -localhost -usepw -once -noxdamage -snapfb -speeds dsl -shared -repeat" &
-
+        "x11vnc -display :${display} -localhost -usepw -once -noxdamage -snapfb -speeds dsl -shared -repeat $extra_args" &
     sleep 4
+
     case true in
         ${flag_realvnc:=})
             /Applications/VNC\ Viewer.app/Contents/MacOS/vncviewer localhost:${localport}

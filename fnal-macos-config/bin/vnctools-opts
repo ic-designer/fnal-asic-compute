@@ -35,6 +35,11 @@ while [[ $# -gt 0 ]]; do
             flag_screenshare=true;
             shift
             ;;
+        --)
+            shift
+            extra_args="$@";
+            break
+            ;;
         *)
             echo "Unknown option $1"
             return 1 2>/dev/null; exit 1;
