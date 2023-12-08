@@ -27,10 +27,10 @@ function parse_git_prompt () {
 }
 
 
-COLOR_DEF=$'\e[0m'
-COLOR_USR=$'\e[38;5;243m'
-COLOR_DIR=$'\e[38;5;197m'
-COLOR_GIT=$'\e[38;5;022m'
+COLOR_DEF=$'%{\e[0m%}'
+COLOR_USR=$'%{\e[38;5;243m%}'
+COLOR_DIR=$'%{\e[38;5;197m%}'
+COLOR_GIT=$'%{\e[38;5;022m%}'
 setopt PROMPT_SUBST
 export PROMPT='${COLOR_USR}%n ${COLOR_DIR}%1~ ${COLOR_GIT}$(parse_git_prompt)${COLOR_DEF} $ '
 
