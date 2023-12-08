@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-
-vnctools-kill "$@"
-vnctools-start "$@"
-vnctools-open "$@"
