@@ -1,11 +1,14 @@
 DESTDIR:=~/.local
 HOMEDIR:=~
+NAME:=fnal-macos-config
 VERSION:=0.1.0
 
 
-NAME:=fnal-macos-config
 DESTDIR_LIB_ROOT:=$(DESTDIR)/lib/$(NAME)-$(VERSION)
 DESTDIR_LIB:=$(DESTDIR_LIB_ROOT)/$(NAME)-$(VERSION)
+
+DIR_BUILD:=.make
+DIR_DEPS:=$(DIR_BUILD)/deps
 
 
 .PHONY: install
