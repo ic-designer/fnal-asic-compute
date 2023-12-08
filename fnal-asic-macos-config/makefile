@@ -1,6 +1,6 @@
 DESTDIR:=~/.local
 HOMEDIR:=~
-NAME:=fnal-macos-config
+NAME:=fnal-asic-macos-config
 VERSION:=0.1.0
 
 
