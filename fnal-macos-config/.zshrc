@@ -4,10 +4,11 @@ _ZSHRC_LOCAL=~/.zshrc_local
 
 alias ls='ls --color=always'
 alias ll='ls -al'
-alias kload='kinit -ft ~/.kerberos/${USERNAME}.keytab ${USERNAME}@FNAL.GOV && klist'
+alias kload='kinit -R || kinit -r 7days -ft ~/.kerberos/${USERNAME}.keytab ${USERNAME}@FNAL.GOV; klist'
+alias ssh='kload; ssh'
 
-export PATH=$PATH:~/bin:.
-export KRB5_CONFIG=~/.kerebos/krb5.conf
+export PATH=$PATH:~/.local/bin:.
+
 
 function parse_git_branch () {
     git branch 2> /dev/null | sed -n -e 's/^\* \(.*\)/\1/p'
@@ -25,7 +26,6 @@ function parse_git_prompt () {
         echo ""
     fi
 }
-
 
 COLOR_DEF=$'%{\e[0m%}'
 COLOR_USR=$'%{\e[38;5;243m%}'
