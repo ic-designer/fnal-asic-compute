@@ -31,11 +31,11 @@ uninstall:
 
 $(HOMEDIR)/% : $(DESTDIR_LIB)/%
 	install -dv $(dir $@)
-	install -Tv $< $@
+	ln -sfhv $< $@
 
 $(DESTDIR_LIB)/% : %
 	install -dv $(dir $@)
-	ln -sfrTv $< $@
+	install -v $< $@
 
 %/ :
 	mkdir -p $@
