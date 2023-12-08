@@ -1,17 +1,19 @@
-DESTDIR=~/.local
-HOMEDIR=~
+DESTDIR:=~/.local
+HOMEDIR:=~
 VERSION:=0.1.0
 
 
-DESTDIR_LIB:=$(DESTDIR)/lib/fnal-macos-config/fnal-macos-config-$(VERSION)
+NAME:=fnal-macos-config
+DESTDIR_LIB_ROOT:=$(DESTDIR)/lib/$(NAME)-$(VERSION)
+DESTDIR_LIB:=$(DESTDIR_LIB_ROOT)/$(NAME)-$(VERSION)
+
 
 .PHONY: install
 install: \
 		$(DESTDIR_LIB)/.zshrc \
 		$(DESTDIR_LIB)/.kerberos/krbtools-keytab \
 		$(DESTDIR_LIB)/.kerberos/krb5.conf \
-		$(DESTDIR_LIB)/.ssh/config \
-		$(HOMEDIR)/.zshrc \
+ 		$(HOMEDIR)/.zshrc \
 		$(HOMEDIR)/.kerberos/krb5.conf \
 		$(HOMEDIR)/.kerberos/krbtools-keytab \
 		$(HOMEDIR)/.ssh/config
@@ -19,8 +21,8 @@ install: \
 
 .PHONY: uninstall
 uninstall:
-	\rm -rfv $(DESTDIR)/lib/fnal-macos-config/fnal-macos-config-$(VERSION)
-	\rm -dv $(DESTDIR)/lib/fnal-macos-config || true
+	\rm -rfv $(DESTDIR_LIB_VERSION)
+	\rm -dv $(DESTDIR_LIB_ROOT) || true
 	\rm -dv $(DESTDIR)/lib || true
 	\rm -fv $(HOMEDIR)/.zshrc  || true
 	\rm -fv $(HOMEDIR)/.kerberos/krb5.conf || true
@@ -31,11 +33,17 @@ uninstall:
 
 $(HOMEDIR)/% : $(DESTDIR_LIB)/%
 	install -dv $(dir $@)
-	ln -sfhv $< $@
+	ln -sfhv $< $(dir $@)
+
 
 $(DESTDIR_LIB)/% : %
 	install -dv $(dir $@)
+ifeq ($(VERSION),develop)
+	ln -sfhv $(realpath $<) $(dir $@)
+else
 	install -v $< $@
+endif
+
 
 %/ :
 	mkdir -p $@
