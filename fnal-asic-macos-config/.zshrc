@@ -7,7 +7,17 @@ alias ll='ls -al'
 alias kload='kinit -R || kinit -r 7days -ft ~/.kerberos/${USERNAME}.keytab ${USERNAME}@FNAL.GOV; klist'
 alias ssh='kload; ssh'
 
-export PATH=$PATH:~/.local/bin:.
+pathmunge () {
+    case ":${PATH}:" in
+        *:"$1":*)
+            ;;
+        *)
+            export PATH=$1:${PATH}
+            ;;
+    esac
+}
+pathmunge ~/.local/bin
+pathmunge .
 
 
 function parse_git_branch () {
