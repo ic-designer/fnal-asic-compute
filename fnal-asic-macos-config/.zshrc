@@ -1,6 +1,5 @@
-# comnon .zshrc
+# zsh run control file
 _ZSHRC_LOCAL=~/.zshrc_local
-
 
 alias ls='ls --color=always'
 alias ll='ls -al'
