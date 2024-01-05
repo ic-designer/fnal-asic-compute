@@ -21,7 +21,7 @@ $(WORKDIR_PKGS)/bash-vnctools/makefile: | $(WORKDIR_PKGS)/.
 	$(call git-clone-shallow, \
 			git@github.com:ic-designer/bash-vnctools.git, \
 			$(WORKDIR_PKGS)/bash-vnctools, \
-			0.1.1)
+			0.1.0)
 
 
 # Private targets
@@ -34,7 +34,9 @@ private_install: \
  		$(HOMEDIR)/.zshrc \
 		$(HOMEDIR)/.kerberos/krb5.conf \
 		$(HOMEDIR)/.kerberos/krbtools-keytab \
-		$(HOMEDIR)/.ssh/config
+		$(HOMEDIR)/.ssh/config \
+		$(WORKDIR_PKGS)/bash-vnctools/makefile
+	$(MAKE) -C $(WORKDIR_PKGS)/bash-vnctools/ install DESTDIR=$(DESTDIR)
 
 $(DESTDIR)/$(PKGSUBDIR)/% : %
 ifeq ($(VERSION),develop)
