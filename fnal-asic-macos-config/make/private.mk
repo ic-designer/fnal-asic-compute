@@ -10,6 +10,7 @@ WORKDIR_PKGS ?= $(error ERROR: Undefined variable WORKDIR_PKGS)
 WORKDIR_TEST ?= $(error ERROR: Undefined variable WORKDIR_TEST)
 
 override PKGSUBDIR:=$(LIBSUBDIR)/$(NAME)/$(NAME)-$(VERSION)
+override SRCSUBDIR:=src
 
 
 # Includes
@@ -38,7 +39,7 @@ private_install: \
 		$(WORKDIR_PKGS)/bash-vnctools/makefile
 	$(MAKE) -C $(WORKDIR_PKGS)/bash-vnctools/ install DESTDIR=$(DESTDIR)
 
-$(DESTDIR)/$(PKGSUBDIR)/% : %
+$(DESTDIR)/$(PKGSUBDIR)/% : $(SRCSUBDIR)/%
 ifeq ($(VERSION),develop)
 	$(call install-as-link)
 else
