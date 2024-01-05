@@ -10,7 +10,7 @@ WORKDIR_PKGS ?= $(error ERROR: Undefined variable WORKDIR_PKGS)
 WORKDIR_TEST ?= $(error ERROR: Undefined variable WORKDIR_TEST)
 
 override PKGSUBDIR:=$(LIBSUBDIR)/$(NAME)/$(NAME)-$(VERSION)
-
+override SRCSUBDIR:=src
 
 # Includes
 include make/extras.mk
@@ -20,15 +20,17 @@ include make/extras.mk
 .PHONY: private_install
 private_install: \
 		$(DESTDIR)/$(PKGSUBDIR)/.bashrc \
-		$(DESTDIR)/$(PKGSUBDIR)/.bashrc_profile \
+		$(DESTDIR)/$(PKGSUBDIR)/.bash_profile \
 		$(DESTDIR)/$(PKGSUBDIR)/.local/bin/filename-search-and-replace \
+		$(DESTDIR)/$(PKGSUBDIR)/.local/bin/install-pyenv \
 		$(DESTDIR)/$(PKGSUBDIR)/.ssh/config \
 		$(HOMEDIR)/.bashrc \
-		$(HOMEDIR)/.bashrc_profile \
+		$(HOMEDIR)/.bash_profile \
 		$(HOMEDIR)/.local/bin/filename-search-and-replace \
+		$(HOMEDIR)/.local/bin/install-pyenv \
 		$(HOMEDIR)/.ssh/config
 
-$(DESTDIR)/$(PKGSUBDIR)/% : %
+$(DESTDIR)/$(PKGSUBDIR)/% : $(SRCSUBDIR)/%
 ifeq ($(VERSION),develop)
 	$(call install-as-link)
 else
