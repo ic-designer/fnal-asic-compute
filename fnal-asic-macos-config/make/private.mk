@@ -7,6 +7,7 @@ VERSION ?= $(error ERROR: Undefined variable VERSION)
 LIBSUBDIR ?= $(error ERROR: Undefined variable LIBSUBDIR)
 WORKDIR ?= $(error ERROR: Undefined variable WORKDIR)
 WORKDIR_PKGS ?= $(error ERROR: Undefined variable WORKDIR_PKGS)
+WORKDIR_TEST ?= $(error ERROR: Undefined variable WORKDIR_TEST)
 
 override PKGSUBDIR:=$(LIBSUBDIR)/$(NAME)/$(NAME)-$(VERSION)
 
@@ -36,22 +37,14 @@ private_install: \
 		$(HOMEDIR)/.ssh/config
 
 $(DESTDIR)/$(PKGSUBDIR)/% : %
-	@install -dv $(dir $@)
 ifeq ($(VERSION),develop)
-	@ln -sfv $(realpath $<) $@ && test -e $@
-	@test -L $@
+	$(call install-as-link)
 else
-	install -v $< $@
+	$(call install-as-file)
 endif
-	@test -f $@
-	@diff $@ $<
 
 $(HOMEDIR)/% : $(DESTDIR)/$(PKGSUBDIR)/%
-	@install -dv $(dir $@)
-	@ln -sfv $(realpath $<) $@
-	@test -L $@
-	@test -f $@
-	@diff $@ $<
+	$(call install-as-link)
 
 
 .PHONY: private_uninstall
@@ -72,12 +65,16 @@ private_uninstall:
 	@test ! -e $(HOMEDIR)/.ssh/config
 
 
+.PHONY: private_test
+private_test :
+	@$(MAKE) install DESTDIR=$(abspath $(WORKDIR_TEST)) HOMEDIR=$(abspath $(WORKDIR_TEST))/home
+
+
 .PHONY: private_clean
 private_clean:
-	@echo "Cleaning directories: $(WORKDIR), $(WORKDIR_PKGS), $(WORKDIR_TEST)"
+	@echo "Cleaning directories: $(WORKDIR), $(WORKDIR_PKGS)"
 	$(if $(wildcard $(WORKDIR)), rm -rf $(WORKDIR))
 	$(if $(wildcard $(WORKDIR_PKGS)), rm -rf $(WORKDIR_PKGS))
-	$(if $(wildcard $(WORKDIR_TEST)), rm -rf $(WORKDIR_TEST))
 
 
 .PHONY: private_pkg_list

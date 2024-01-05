@@ -32,6 +32,23 @@ define git-list-remotes
 endef
 
 
+define install-as-file
+	@install -dv $(dir $@)
+	install -v $< $@
+	@test -f $@
+	@diff $@ $<
+endef
+
+
+define install-as-link
+	@install -dv $(dir $@)
+	@ln -sfv $(realpath $<) $@
+	@test -L $@
+	@test -f $@
+	@diff $@ $<
+endef
+
+
 .PRECIOUS: %/.
 %/. :
 	@mkdir -p $@
