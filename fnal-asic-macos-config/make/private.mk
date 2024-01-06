@@ -26,24 +26,29 @@ $(WORKDIR_PKGS)/bash-vnctools/makefile: | $(WORKDIR_PKGS)/.
 
 
 # Private targets
+SRCS = \
+	.kerberos/krb5.conf \
+	.kerberos/krbtools-keytab \
+	.ssh/config \
+	.zshrc
+
+
 .PHONY: private_install
-private_install: \
-		$(DESTDIR)/$(PKGSUBDIR)/.zshrc \
-		$(DESTDIR)/$(PKGSUBDIR)/.kerberos/krbtools-keytab \
-		$(DESTDIR)/$(PKGSUBDIR)/.kerberos/krb5.conf \
-		$(DESTDIR)/$(PKGSUBDIR)/.ssh/config \
- 		$(HOMEDIR)/.zshrc \
-		$(HOMEDIR)/.kerberos/krb5.conf \
-		$(HOMEDIR)/.kerberos/krbtools-keytab \
-		$(HOMEDIR)/.ssh/config \
-		$(WORKDIR_PKGS)/bash-vnctools/makefile
-	$(MAKE) -C $(WORKDIR_PKGS)/bash-vnctools/ install DESTDIR=$(DESTDIR)
+private_install: $(WORKDIR_PKGS)/bash-vnctools/makefile
+	@$(MAKE) test
+	@$(MAKE) private_install_all_srcs
+	@$(MAKE) -C $(WORKDIR_PKGS)/bash-vnctools/ install DESTDIR=$(DESTDIR)
+
+
+.PHONY: private_install_all_srcs
+private_install_srcs: $(foreach s, $(SRCS), $(DESTDIR)/$(PKGSUBDIR)/$(s) $(HOMEDIR)/$(s))
+	diff -qr $(DESTDIR)/$(PKGSUBDIR) $(SRCSUBDIR)
 
 $(DESTDIR)/$(PKGSUBDIR)/% : $(SRCSUBDIR)/%
 ifeq ($(VERSION),develop)
 	$(call install-as-link)
 else
-	$(call install-as-file)
+	$(call install-as-copy)
 endif
 
 $(HOMEDIR)/% : $(DESTDIR)/$(PKGSUBDIR)/%
@@ -52,25 +57,17 @@ $(HOMEDIR)/% : $(DESTDIR)/$(PKGSUBDIR)/%
 
 .PHONY: private_uninstall
 private_uninstall:
-	@-\rm -fv $(DESTDIR)/$(PKGSUBDIR)/*
-	@-\rm -dv $(DESTDIR)/$(PKGSUBDIR)
+	$(foreach s, $(SRCS), \rm -v $(HOMEDIR)/$(s) && test ! -e $(HOMEDIR)/$(s); \rm -dv $(dir $(HOMEDIR)/$(s)); )
+	@-\rm -rdfv $(DESTDIR)/$(PKGSUBDIR)
 	@-\rm -dv $(dir $(DESTDIR)/$(PKGSUBDIR))
 	@-\rm -dv $(DESTDIR)/$(LIBSUBDIR)
-	@test ! -e $(DESTDIR)/$(PKGSUBDIR)
-	@-\rm -dv $(HOMEDIR)/.zshrc
-	@test ! -e $(HOMEDIR)/.zshrc
-	@-\rm -dv $(HOMEDIR)/.kerberos/krb5.conf
-	@test ! -e $(HOMEDIR)/.kerberos/krb5.conf
-	@-\rm -dv $(HOMEDIR)/.kerberos/krbtools-keytab
-	@test ! -e $(HOMEDIR)/.kerberos/krbtools-keytab
-	@-\rm -dv $(HOMEDIR)/.kerberos
-	@-\rm -dv $(HOMEDIR)/.ssh/config
-	@test ! -e $(HOMEDIR)/.ssh/config
 
 
 .PHONY: private_test
 private_test :
-	@$(MAKE) install DESTDIR=$(abspath $(WORKDIR_TEST)) HOMEDIR=$(abspath $(WORKDIR_TEST))/home
+	@$(MAKE) private_install_srcs private_uninstall \
+		DESTDIR=$(abspath $(WORKDIR_TEST))/dest \
+		HOMEDIR=$(abspath $(WORKDIR_TEST))/home
 
 
 .PHONY: private_clean
