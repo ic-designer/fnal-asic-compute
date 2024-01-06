@@ -9,8 +9,12 @@ on:
       - cron: '0 0 * * *'
 
 jobs:
-  linux-config:
-    runs-on: ubuntu-latest
+  build:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+        matrix:
+            os: [ubuntu-latest, macos-latest]
 
     steps:
     - uses: actions/checkout@v3
@@ -19,31 +23,11 @@ jobs:
       with:
         ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-    - name: Run Linux config tests
-      run: make -C fnal-asic-linux-config test
+    - name: Run test
+      run: make clean test clean
 
-    - name: Run Linux mock install and uninstall
-      run: make -C fnal-asic-linux-config clean install uninstall DESTDIR=.make/local
+    - name: Run mock install and uninstall
+      run: make clean install uninstall clean DESTDIR=.make/home/.local HOMEDIR=.make/home
 
-    - name: Run Linux install and uninstall
-      run: make -C fnal-asic-linux-config clean install uninstall
-
-
-  macos-config:
-    runs-on: macos-latest
-
-    steps:
-    - uses: actions/checkout@v3
-
-    - uses: webfactory/ssh-agent@v0.8.0
-      with:
-        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-    - name: Run MacOS tests
-      run: make -C fnal-asic-macos-config test
-
-    - name: Run MacOS mock install and uninstall
-      run: make -C fnal-asic-macos-config clean install uninstall DESTDIR=.make/local
-
-    - name: Run MacOS install and uninstall
-      run: make -C fnal-asic-macos-config clean install uninstall
+    - name: Run install and uninstall
+      run: make clean install uninstall clean

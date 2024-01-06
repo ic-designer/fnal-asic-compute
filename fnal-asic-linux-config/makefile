@@ -1,8 +1,22 @@
-DESTDIR:=~/.local
-HOMEDIR:=~
-NAME:=fnal-asic-linux-config
-override VERSION:=0.2.0
+# Config
+.DELETE_ON_ERROR:
+.SUFFIXES:
+MAKEFLAGS += --no-builtin-rules
 
+
+# Shared Targets
+SRCS = \
+	.bash_profile \
+	.bashrc \
+	.local/bin/filename-search-and-replace \
+	.local/bin/install-pyenv \
+	.ssh/config
+include shared-targets.mk
+
+
+# Targets
+.PHONY: check
+test: private_test
 
 .PHONY: clean
 clean: private_clean
@@ -21,19 +35,3 @@ test: private_test
 
 .PHONY: uninstall
 uninstall: private_uninstall
-
-
-# Config
-.DELETE_ON_ERROR:
-.SUFFIXES:
-MAKEFLAGS += --no-builtin-rules
-
-# Paths
-override LIBSUBDIR:=lib
-override WORKDIR:=.make
-override WORKDIR_PKGS:=$(WORKDIR)/pkgs
-override WORKDIR_TEST:=$(WORKDIR)/test
-
-
-# Includes
-include make/private.mk

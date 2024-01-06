@@ -13,18 +13,18 @@ endef
 
 define install-as-copy
 	@install -dv $(dir $@)
-	install -v $< $@
-	@test -f $@
-	@diff $@ $<
+	@install -Sv $< $@
+	test -f $@
+	diff $@ $<
 endef
 
 
 define install-as-link
 	@install -dv $(dir $@)
 	@ln -sfv $(realpath $<) $@
-	@test -L $@
-	@test -f $@
-	@diff $@ $<
+	test -L $@
+	test -f $@
+	diff $@ $<
 endef
 
 
