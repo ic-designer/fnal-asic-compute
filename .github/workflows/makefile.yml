@@ -22,6 +22,12 @@ jobs:
     - name: Run Linux config tests
       run: make -C fnal-asic-linux-config test
 
+    - name: Run Linux mock install and uninstall
+      run: make -C fnal-asic-linux-config clean install uninstall DESTDIR=.make/local
+
+    - name: Run Linux install and uninstall
+      run: make -C fnal-asic-linux-config clean install uninstall
+
 
   macos-config:
     runs-on: macos-latest
@@ -35,3 +41,9 @@ jobs:
 
     - name: Run MacOS tests
       run: make -C fnal-asic-macos-config test
+
+    - name: Run MacOS mock install and uninstall
+      run: make -C fnal-asic-macos-config clean install uninstall DESTDIR=.make/local
+
+    - name: Run MacOS install and uninstall
+      run: make -C fnal-asic-macos-config clean install uninstall
