@@ -11,7 +11,7 @@ define git-list-remotes
 endef
 
 
-define install-as-file
+define install-as-copy
 	@install -dv $(dir $@)
 	install -v $< $@
 	@test -f $@
