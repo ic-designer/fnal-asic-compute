@@ -17,50 +17,46 @@ include make/extras.mk
 
 
 # Private targets
-.PHONY: private_install
-private_install: \
-		$(DESTDIR)/$(PKGSUBDIR)/.bashrc \
-		$(DESTDIR)/$(PKGSUBDIR)/.bash_profile \
-		$(DESTDIR)/$(PKGSUBDIR)/.local/bin/filename-search-and-replace \
-		$(DESTDIR)/$(PKGSUBDIR)/.local/bin/install-pyenv \
-		$(DESTDIR)/$(PKGSUBDIR)/.ssh/config \
-		$(HOMEDIR)/.bashrc \
-		$(HOMEDIR)/.bash_profile \
-		$(HOMEDIR)/.local/bin/filename-search-and-replace \
-		$(HOMEDIR)/.local/bin/install-pyenv \
-		$(HOMEDIR)/.ssh/config
+SRCS = \
+	.bash_profile \
+	.bashrc \
+	.local/bin/filename-search-and-replace \
+	.local/bin/install-pyenv \
+	.ssh/config
 
-$(DESTDIR)/$(PKGSUBDIR)/% : $(SRCSUBDIR)/%
+
+.PHONY: private_install
+private_install:
+	@$(MAKE) test
+	@$(MAKE) private_install_all_srcs
+
+.PHONY: private_install_all_srcs
+private_install_srcs: $(foreach s, $(SRCS), $(DESTDIR)/$(PKGSUBDIR)/$(s) $(HOMEDIR)/$(s))
+
+$(DESTDIR)/$(PKGSUBDIR)/%: $(SRCSUBDIR)/%
 ifeq ($(VERSION),develop)
 	$(call install-as-link)
 else
-	$(call install-as-file)
+	$(call install-as-copy)
 endif
 
-$(HOMEDIR)/% : $(DESTDIR)/$(PKGSUBDIR)/%
+$(HOMEDIR)/%: $(DESTDIR)/$(PKGSUBDIR)/%
 	$(call install-as-link)
 
 
 .PHONY: private_uninstall
 private_uninstall:
-	@-\rm -fv $(DESTDIR)/$(PKGSUBDIR)/*
-	@-\rm -dv $(DESTDIR)/$(PKGSUBDIR)
+	$(foreach s, $(SRCS), \rm -v $(HOMEDIR)/$(s) && test ! -e $(HOMEDIR)/$(s); \rm -dv $(dir $(HOMEDIR)/$(s)); )
+	@-\rm -rdfv $(DESTDIR)/$(PKGSUBDIR)
 	@-\rm -dv $(dir $(DESTDIR)/$(PKGSUBDIR))
 	@-\rm -dv $(DESTDIR)/$(LIBSUBDIR)
-	@test ! -e $(DESTDIR)/$(PKGSUBDIR)
-	@-\rm -dv $(HOMEDIR)/.bashrc
-	@test ! -e $(HOMEDIR)/.bashrc
-	@-\rm -dv $(HOMEDIR)/.bashrc_profile
-	@test ! -e $(HOMEDIR)/.bashrc_profile
-	@-\rm -dv $(HOMEDIR)/.ssh/config
-	@test ! -e $(HOMEDIR)/.ssh/config
-	@-\rm -dv $(HOMEDIR)/.local/bin/filename-search-and-replace
-	@test ! -e $(HOMEDIR)/.local/bin/filename-search-and-replace
 
 
 .PHONY: private_test
 private_test :
-	@$(MAKE) install DESTDIR=$(abspath $(WORKDIR_TEST)) HOMEDIR=$(abspath $(WORKDIR_TEST))/home
+	@$(MAKE) private_install_srcs private_uninstall \
+		DESTDIR=$(abspath $(WORKDIR_TEST))/dest \
+		HOMEDIR=$(abspath $(WORKDIR_TEST))/home
 
 
 .PHONY: private_clean
