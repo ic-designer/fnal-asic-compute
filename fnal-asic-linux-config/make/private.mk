@@ -49,7 +49,7 @@ $(HOMEDIR)/%: $(DESTDIR)/$(PKGSUBDIR)/%
 
 .PHONY: private_uninstall
 private_uninstall:
-	$(foreach s, $(SRCS), \rm -v $(HOMEDIR)/$(s) && test ! -e $(HOMEDIR)/$(s); \rm -dv $(dir $(HOMEDIR)/$(s)); )
+	$(foreach s, $(SRCS), \rm -v $(HOMEDIR)/$(s) && test ! -e $(HOMEDIR)/$(s); \rm -dv $(dir $(HOMEDIR)/$(s)) || true; )
 	@-\rm -rdfv $(DESTDIR)/$(PKGSUBDIR)
 	@-\rm -dv $(dir $(DESTDIR)/$(PKGSUBDIR))
 	@-\rm -dv $(DESTDIR)/$(LIBSUBDIR)
