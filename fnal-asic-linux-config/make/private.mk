@@ -12,6 +12,7 @@ WORKDIR_TEST ?= $(error ERROR: Undefined variable WORKDIR_TEST)
 override PKGSUBDIR:=$(LIBSUBDIR)/$(NAME)/$(NAME)-$(VERSION)
 override SRCSUBDIR:=src
 
+
 # Includes
 include make/extras.mk
 
@@ -29,6 +30,7 @@ SRCS = \
 private_install:
 	@$(MAKE) test
 	@$(MAKE) private_install_all_srcs
+
 
 .PHONY: private_install_all_srcs
 private_install_srcs: $(foreach s, $(SRCS), $(DESTDIR)/$(PKGSUBDIR)/$(s) $(HOMEDIR)/$(s))
