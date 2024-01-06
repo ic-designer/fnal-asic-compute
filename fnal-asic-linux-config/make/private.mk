@@ -34,6 +34,7 @@ private_install:
 
 .PHONY: private_install_all_srcs
 private_install_srcs: $(foreach s, $(SRCS), $(DESTDIR)/$(PKGSUBDIR)/$(s) $(HOMEDIR)/$(s))
+	diff -qr $(DESTDIR)/$(PKGSUBDIR) $(SRCSUBDIR)
 
 $(DESTDIR)/$(PKGSUBDIR)/%: $(SRCSUBDIR)/%
 ifeq ($(VERSION),develop)
