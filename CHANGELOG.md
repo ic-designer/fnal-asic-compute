@@ -24,7 +24,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 
 
-## [0.1.0] - 2023-09-26
+## [0.2.0] - 2024-01-06
+
+### Added
+- Created special files CHANGELOG.md, LICENSE, README.md, and TODO.md
+- Automated testing for both Linux and MacOS using GitHub workflows.
+### Changed
+- Installation and testing managed through Makefiles instead of custom bash scripts.
+- Repository has been moved to the `ic-designer` organization to keep with dependencies.
+- MacOS scripts for `vnctools` now provided by the `bash-vnctools` repo
+
+
+## [0.1.0] - 2023-12-30
 
 ### Added
 - Initial configuration for MacOS
