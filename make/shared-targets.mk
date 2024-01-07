@@ -5,13 +5,14 @@ HOMEDIR ?= $(error ERROR: Undefined variable HOMEDIR)
 NAME ?= $(error ERROR: Undefined variable NAME)
 SRCS ?= $(error ERROR: Undefined variable SRCS)
 VERSION ?= $(error ERROR: Undefined variable VERSION)
-WORKDIR ?= $(error ERROR: Undefined variable WORKDIR)
+WORKDIR_ROOT ?= $(error ERROR: Undefined variable WORKDIR_ROOT)
 
-override LIBSUBDIR=lib
-override PKGSUBDIR=$(LIBSUBDIR)/$(NAME)/$(NAME)-$(VERSION)
-override SRCSUBDIR=src
-override WORKDIR_PKGS=$(WORKDIR)/$(TARGET_CONFIG)-$(VERSION)/pkgs
-override WORKDIR_TEST=$(WORKDIR)/$(TARGET_CONFIG)-$(VERSION)/test
+override LIBSUBDIR = lib
+override PKGSUBDIR = $(LIBSUBDIR)/$(NAME)/$(NAME)-$(VERSION)
+override SRCSUBDIR = src
+override WORKDIR = $(WORKDIR_ROOT)/$(NAME)-$(VERSION)
+override WORKDIR_PKGS = $(WORKDIR)/pkgs
+override WORKDIR_TEST = $(WORKDIR)/test
 
 
 # Includes
@@ -21,9 +22,11 @@ include shared-recipes.mk
 # Targets
 .PHONY: private_clean
 private_clean:
-	@echo "Cleaning directories: $(WORKDIR), $(WORKDIR_PKGS)"
+	@echo "Cleaning directories: $(WORKDIR_ROOT), $(WORKDIR), $(WORKDIR_PKGS), $(WORKDIR_TEST)"
 	$(if $(wildcard $(WORKDIR)), rm -rf $(WORKDIR))
 	$(if $(wildcard $(WORKDIR_PKGS)), rm -rf $(WORKDIR_PKGS))
+	$(if $(wildcard $(WORKDIR_ROOT)), rm -rf $(WORKDIR_ROOT))
+	$(if $(wildcard $(WORKDIR_TEST)), rm -rf $(WORKDIR_TEST))
 
 
 .PHONY: private_install
