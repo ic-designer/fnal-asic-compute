@@ -3,13 +3,14 @@
 .SUFFIXES:
 MAKEFLAGS += --no-builtin-rules
 
-
 # Paths
-DESTDIR = ~/.local
-HOMEDIR = ~
+DESTDIR =
+HOMEDIR = $(HOME)
+PREFIX = $(HOME)/.local
+LIBDIR = $(PREFIX)/lib
+WORKDIR_ROOT = $(CURDIR)/.make
 
-
-# Constants
+# Configuration
 UNAME_OS:=$(shell sh -c 'uname -s 2>/dev/null')
 ifeq ($(UNAME_OS),Darwin)
     TARGET_CONFIG := fnal-asic-macos-config
@@ -18,9 +19,6 @@ else ifeq ($(UNAME_OS),Linux)
 else
     $(error Unsupported operating system, $(UNAME_OS))
 endif
-override NAME := $(TARGET_CONFIG)
-override VERSION := $(shell git describe --always --dirty --broken)
-override WORKDIR_ROOT := $(CURDIR)/.make
 
 
 # Configuration specific targets
