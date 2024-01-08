@@ -19,8 +19,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 ### Changed
+- Updated the Makefiles to the use the shared Boxbird utilities.
 ### Deprecated
 ### Fixed
+- Corrected issue with GitHub workflow where make target were not properly ran by calling each
+  make target as a seperate command.
 ### Security
 
 

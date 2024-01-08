@@ -23,14 +23,34 @@ jobs:
       with:
         ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-    - name: Run test with bad OS
-      run: test ! `make clean test clean UNAME_OS=bad-os`
+    - name: Run check
+      run: |
+        make clean
+        make check
+
+    - name: Run check with bad OS
+      run: |
+        make clean
+        test ! `make check UNAME_OS=bad-os`
 
     - name: Run test
-      run: make clean test clean
+      run: |
+        make clean
+        make test
 
-    - name: Run mock install and uninstall
-      run: make clean install uninstall clean DESTDIR=.make/home/.local HOMEDIR=.make/home
+    - name: Run test with bad OS
+      run: |
+        make clean
+        test ! `make test UNAME_OS=bad-os`
+
+    - name: Run staged install and uninstall
+      run: |
+        make clean
+        make install DESTDIR=.make HOMEDIR=home PREFIX=local
+        make uninstall DESTDIR=.make HOMEDIR=home PREFIX=local
 
     - name: Run install and uninstall
-      run: make clean install uninstall clean
+      run: |
+        make clean
+        make install
+        make uninstall
