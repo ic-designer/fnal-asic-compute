@@ -19,15 +19,17 @@ check: private_test
 clean: private_clean
 
 .PHONY: install
-install: private_install $(VNCTOOLS.MK)
+install: $(VNCTOOLS.MK)
+	@$(MAKE) private_install
 	@$(MAKE) -C $(dir $(VNCTOOLS.MK)) install
 
 .PHONY: test
 test: private_test
 
 .PHONY: uninstall
-uninstall: private_uninstall $(VNCTOOLS.MK)
+uninstall: $(VNCTOOLS.MK)
 	@$(MAKE) -C $(dir $(VNCTOOLS.MK)) uninstall
+	@$(MAKE) private_uninstall
 
 # Shared Targets
 SRCS = \
