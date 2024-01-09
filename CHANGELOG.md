@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - MacOS prompt now provices either a tag or a hash on the prompt when repo has a detached head.
 ### Deprecated
 ### Fixed
+- Corrected issus where kerberos username must match the local username.
 ### Security
 
 
