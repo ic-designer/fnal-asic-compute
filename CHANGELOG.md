@@ -19,7 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Initial documentation for this repo added to README.md.
 ### Changed
-- MacOS prompt now provices either a tag or a hash on the prompt when repo has a detached head.
+- MacOS prompt now provides either a tag or a hash when the repo has a detached head.
 ### Deprecated
 ### Fixed
 - Corrected issus where kerberos username must match the local username.
