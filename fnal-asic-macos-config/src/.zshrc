@@ -1,5 +1,6 @@
 # constants
 _ZSHRC_LOCAL=~/.zshrc_local
+export KRB5_CONFIG=~/.kerberos/krb5.conf
 
 # aliases
 alias ls='ls --color=always'
