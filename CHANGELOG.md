@@ -15,6 +15,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 ```
 
+## [Unreleased] - YYYY-MM-DD
+### Added
+- Initial documentation for this repo added to README.md.
+### Changed
+### Deprecated
+### Fixed
+### Security
+
+
 ## [0.2.1] - 2024-01-08
 ### Changed
 - Updated the Makefiles to the use standard installation directory variables.
