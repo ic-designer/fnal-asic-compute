@@ -15,22 +15,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 ```
 
-## [Unreleased] - YYYY-MM-DD
-
-### Added
+## [0.2.1] - 2024-01-08
 ### Changed
+- Updated the Makefiles to the use standard installation directory variables.
 - Updated the Makefiles to the use the shared Boxbird utilities.
 - Removed shared-recipes.mk from the repo.
 - Removed the `pkg_override` and `pkg_list` targets.
-### Deprecated
 ### Fixed
 - Corrected issue with GitHub workflow where make target were not properly ran by calling each
   make target as a seperate command.
-### Security
 
 
 ## [0.2.0] - 2024-01-06
-
 ### Added
 - Created special files CHANGELOG.md, LICENSE, README.md, and TODO.md
 - Automated testing for both Linux and MacOS using GitHub workflows.
@@ -41,7 +37,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ## [0.1.0] - 2023-12-30
-
 ### Added
 - Initial configuration for MacOS
 - Initial configuration for Scientific Linux
