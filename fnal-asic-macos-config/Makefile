@@ -14,6 +14,7 @@ include shared-targets.mk
 # Dependencies
 VNCTOOLS.MK = $(WORKDIR_DEPS)/vnctools/Makefile
 $(VNCTOOLS.MK):
+	@test -n $(WORKDIR_DEPS)
 	@echo "Loading vnctools..."
 	git clone --config advice.detachedHead=false \
 		git@github.com:ic-designer/bash-vnctools.git --branch 0.2.0 $(dir $(VNCTOOLS.MK))
