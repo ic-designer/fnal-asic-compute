@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Updated the Makefiles to the use the shared Boxbird utilities.
 - Removed shared-recipes.mk from the repo.
+- Removed the `pkg_override` and `pkg_list` targets.
 ### Deprecated
 ### Fixed
 - Corrected issue with GitHub workflow where make target were not properly ran by calling each
