@@ -27,12 +27,18 @@ function parse_git_remote () {
    git remote -v 2> /dev/null | sed -n -e 's/origin\s*\(.*\:\)*\(.*\) .*(fetch).*/\2/p'
 }
 
+function parse_git_tag () {
+    git describe --always 2> /dev/null
+}
+
 function parse_git_prompt () {
     local branch=$(parse_git_branch)
-    if [[ ! ${branch} == "" ]]; then
-        echo "[$(parse_git_remote):${branch}]"
-    else
+    if [[ ${branch} == "" ]]; then
         echo ""
+    elif [[ ${branch} == "(no branch)" ]]; then
+        echo "[$(parse_git_remote):$(parse_git_tag)]"
+    else
+        echo "[$(parse_git_remote):${branch}]"
     fi
 }
 
