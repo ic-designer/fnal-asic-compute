@@ -1,6 +1,30 @@
 #!/usr/bin/env bash
-
 (
-    set -x
-    ktutil -k ~/.kerberos/$(whoami).keytab add -p $(whoami)@FNAL.GOV -e aes256-cts-hmac-sha1-96 -V 1
+    set -euo pipefail
+
+    KTFILE=~/.kerberos/$(whoami).keytab
+    echo "Setting up kerberos keytab file..."
+    if [[ -f ${KTFILE} ]]; then
+        echo "ERROR: file already exists ${KTFILE}, please manually backup and remove file."
+        exit 1
+    fi
+
+    if [[ -n ${KRB_PRINCIPAL++} ]]; then
+        echo "Using principal ${KRB_PRINCIPAL} from environment variable KRB_PRINCIPAL"
+    else
+        read -p "Enter kerberos principal in the form USER@REALM: " KRB_PRINCIPAL
+    fi
+
+    if [[ -z ${KRB_PRINCIPAL} ]]; then
+        echo "ERROR: kerberos principal is blank"
+        exit 1
+    fi
+    ktutil -k ${KTFILE} add -p ${KRB_PRINCIPAL} -e aes256-cts-hmac-sha1-96 -V 1
+
+    echo ""
+    echo "Generating keytab file..."
+    echo "    Filename: ${KTFILE}"
+    echo "    Principal: ${KRB_PRINCIPAL}"
+    echo ""
+    echo "${KTFILE}: `cat ${KTFILE}`"
 )

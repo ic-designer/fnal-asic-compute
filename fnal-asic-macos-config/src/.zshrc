@@ -1,11 +1,14 @@
-# zsh run control file
+# constants
 _ZSHRC_LOCAL=~/.zshrc_local
+export KRB5_CONFIG=~/.kerberos/krb5.conf
 
+# aliases
 alias ls='ls --color=always'
 alias ll='ls -al'
-alias kload='kinit -R || kinit -r 7days -ft ~/.kerberos/${USERNAME}.keytab ${USERNAME}@FNAL.GOV; klist'
+alias kload='kinit -R || kinit -ft ~/.kerberos/$(whoami).keytab ${KRB_PRINCIPAL}; klist'
 alias ssh='kload; ssh'
 
+# path
 pathmunge () {
     case ":${PATH}:" in
         *:"$1":*)
@@ -18,7 +21,7 @@ pathmunge () {
 pathmunge ~/.local/bin
 pathmunge .
 
-
+# prompt
 function parse_git_branch () {
     git branch 2> /dev/null | sed -n -e 's/^\* \(.*\)/\1/p'
 }
@@ -49,6 +52,7 @@ COLOR_GIT=$'%{\e[38;5;022m%}'
 setopt PROMPT_SUBST
 export PROMPT='${COLOR_USR}%n ${COLOR_DIR}%1~ ${COLOR_GIT}$(parse_git_prompt)${COLOR_DEF} $ '
 
+# local overrides
 if [[ -f ${_ZSHRC_LOCAL} ]]; then
     source ${_ZSHRC_LOCAL}
 fi
