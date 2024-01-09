@@ -3,7 +3,7 @@ _ZSHRC_LOCAL=~/.zshrc_local
 
 alias ls='ls --color=always'
 alias ll='ls -al'
-alias kload='kinit -R || kinit -r 7days -ft ~/.kerberos/${USERNAME}.keytab ${USERNAME}@FNAL.GOV; klist'
+alias kload='kinit -R || kinit -ft ~/.kerberos/$(whoami).keytab ${KRB_PRINCIPAL}; klist'
 alias ssh='kload; ssh'
 
 pathmunge () {
