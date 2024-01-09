@@ -18,7 +18,8 @@ The macOS client configuration provides the following user configuation files:
 - `~/.ssh/config` - FNAL SSH client configurations.
 - `~/.zshrc` - Base zsh run command file.
 
-The following environment variables are also supported:
+The envirnment variables provided below are also supported. These variables can be uniquely set
+for each user by adding to the override file `~/.zshrc_local`.
 - `KRB_PRINCIPAL` - Overrides the default kerebros principal if defined.
 
 The MacOS client configuration also installs `vnctools` to help manage VNC connections.
