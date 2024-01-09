@@ -3,6 +3,14 @@
 .SUFFIXES:
 MAKEFLAGS += --no-builtin-rules
 
+# Shared Targets
+SRCS = \
+	.kerberos/krb5.conf \
+	.kerberos/krbtools-keytab \
+	.ssh/config \
+	.zshrc
+include shared-targets.mk
+
 # Dependencies
 VNCTOOLS.MK = $(WORKDIR_DEPS)/vnctools/Makefile
 $(VNCTOOLS.MK):
@@ -30,11 +38,3 @@ test: private_test
 uninstall: $(VNCTOOLS.MK)
 	@$(MAKE) -C $(dir $(VNCTOOLS.MK)) uninstall
 	@$(MAKE) private_uninstall
-
-# Shared Targets
-SRCS = \
-	.kerberos/krb5.conf \
-	.kerberos/krbtools-keytab \
-	.ssh/config \
-	.zshrc
-include shared-targets.mk

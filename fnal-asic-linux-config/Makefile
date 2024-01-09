@@ -3,6 +3,15 @@
 .SUFFIXES:
 MAKEFLAGS += --no-builtin-rules
 
+# Shared Targets
+SRCS = \
+	.bash_profile \
+	.bashrc \
+	.local/bin/filename-search-and-replace \
+	.local/bin/install-pyenv \
+	.ssh/config
+include shared-targets.mk
+
 # Targets
 .PHONY: check
 check: private_test
@@ -18,12 +27,3 @@ test: private_test
 
 .PHONY: uninstall
 uninstall: private_uninstall
-
-# Shared Targets
-SRCS = \
-	.bash_profile \
-	.bashrc \
-	.local/bin/filename-search-and-replace \
-	.local/bin/install-pyenv \
-	.ssh/config
-include shared-targets.mk
