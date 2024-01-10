@@ -15,6 +15,7 @@ override VERSION := $(shell git describe --always --dirty --broken 2> /dev/null)
 override WORKDIR = $(WORKDIR_ROOT)
 override WORKDIR_BUILD = $(WORKDIR)/build
 override WORKDIR_DEPS = $(WORKDIR)/deps
+override WORKDIR_ROOT = $(CURDIR)/.make
 override WORKDIR_TEST = $(WORKDIR)/test
 
 # Includes

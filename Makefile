@@ -8,7 +8,6 @@ DESTDIR =
 HOMEDIR = $(HOME)
 PREFIX = $(HOME)/.local
 LIBDIR = $(PREFIX)/lib
-WORKDIR_ROOT = $(CURDIR)/.make
 
 # Configuration
 UNAME_OS:=$(shell sh -c 'uname -s 2>/dev/null')
@@ -19,7 +18,6 @@ else ifeq ($(UNAME_OS),Linux)
 else
     $(error Unsupported operating system, $(UNAME_OS))
 endif
-
 
 # Configuration specific targets
 export
