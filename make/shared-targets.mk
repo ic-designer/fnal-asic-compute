@@ -7,12 +7,11 @@ HOMEDIR ?= $(error ERROR: Undefined variable HOMEDIR)
 LIBDIR ?= $(error ERROR: Undefined variable LIBDIR)
 PREFIX ?= $(error ERROR: Undefined variable PREFIX)
 SRCS ?= $(error ERROR: Undefined variable SRCS)
-WORKDIR_ROOT ?= $(error ERROR: Undefined variable WORKDIR_ROOT)
 
 override NAME := $(TARGET_CONFIG)
 override PKGSUBDIR = $(NAME)
 override VERSION := $(shell git describe --always --dirty --broken 2> /dev/null)
-override WORKDIR = $(WORKDIR_ROOT)
+override WORKDIR = $(WORKDIR_ROOT)/$(NAME)/$(VERSION)
 override WORKDIR_BUILD = $(WORKDIR)/build
 override WORKDIR_DEPS = $(WORKDIR)/deps
 override WORKDIR_ROOT = $(CURDIR)/.make
