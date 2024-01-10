@@ -10,7 +10,7 @@ SRCS ?= $(error ERROR: Undefined variable SRCS)
 WORKDIR_ROOT ?= $(error ERROR: Undefined variable WORKDIR_ROOT)
 
 override NAME := $(TARGET_CONFIG)
-override PKGSUBDIR = $(NAME)/$(NAME)-$(VERSION)
+override PKGSUBDIR = $(NAME)
 override VERSION := $(shell git describe --always --dirty --broken 2> /dev/null)
 override WORKDIR = $(WORKDIR_ROOT)
 override WORKDIR_BUILD = $(WORKDIR)/build
