@@ -31,6 +31,7 @@ clean: private_clean
 install: $(VNCTOOLS.MK)
 	@$(MAKE) private_install
 	@$(MAKE) -C $(dir $(VNCTOOLS.MK)) install
+	@echo "Installation successful"
 
 .PHONY: test
 test: private_test
