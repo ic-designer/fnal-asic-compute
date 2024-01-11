@@ -14,6 +14,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 ```
 
+## [0.3.1] - 2023-01-10
+### Added
+- Added an installation successful message to the `install` target.
+- The Makefile variable `WORKDIR_ROOT` can now be overidden on the command line.
+### Changed
+- Build dependencies are now populated under `$(WORKDIR_ROOT)/deps/`.
+- Build artifacts are now populated under `$(WORKDIR_ROOT)/build/`.
+- Test artifacts are now populated under`$(WORKDIR_ROOT)/test/`.
+### Fixed
+- Running target `check` and `test`, now try to test the dependencies as well
+
+
 ## [0.3.0] - 2024-01-09
 ### Added
 - Initial documentation for this repo added to README.md.
