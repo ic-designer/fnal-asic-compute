@@ -17,14 +17,7 @@ override WORKDIR_DEPS = $(WORKDIR_ROOT)/deps
 override WORKDIR_TEST = $(WORKDIR_ROOT)/test/$(NAME)/$(VERSION)
 
 # Includes
-BOXERBIRD_VERSION := 0.1.0
-BOXERBIRD.MK = $(WORKDIR_DEPS)/make-boxerbird-$(BOXERBIRD_VERSION)/boxerbird.mk
-$(BOXERBIRD.MK):
-	@echo "Loading boxerbird..."
-	mkdir -p $(WORKDIR_DEPS)
-	curl -sL https://github.com/ic-designer/make-boxerbird/archive/refs/tags/$(BOXERBIRD_VERSION).tar.gz | tar xz -C $(WORKDIR_DEPS)
-	test -f $@
-	@echo
+include deps.mk
 include $(BOXERBIRD.MK)
 
 # Targets
