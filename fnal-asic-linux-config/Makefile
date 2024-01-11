@@ -3,13 +3,15 @@
 .SUFFIXES:
 MAKEFLAGS += --no-builtin-rules
 
-# Shared Targets
-SRCS = \
+# Constants
+override SRCS = \
 	.bash_profile \
 	.bashrc \
 	.local/bin/filename-search-and-replace \
 	.local/bin/install-pyenv \
 	.ssh/config
+
+# Includes
 include shared-targets.mk
 
 # Targets
