@@ -1,15 +1,3 @@
-# Config
-.DELETE_ON_ERROR:
-.SUFFIXES:
-MAKEFLAGS += --no-builtin-rules
-
-# Constants
-override SRCS = \
-	.kerberos/krb5.conf \
-	.kerberos/krbtools-keytab \
-	.ssh/config \
-	.zshrc
-
 # Includes
 include private.mk
 

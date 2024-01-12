@@ -6,12 +6,14 @@ DESTDIR ?= $(error ERROR: Undefined variable DESTDIR)
 HOMEDIR ?= $(error ERROR: Undefined variable HOMEDIR)
 LIBDIR ?= $(error ERROR: Undefined variable LIBDIR)
 PREFIX ?= $(error ERROR: Undefined variable PREFIX)
-SRCS ?= $(error ERROR: Undefined variable SRCS)
 WORKDIR_ROOT ?= $(error ERROR: Undefined variable WORKDIR_ROOT)
 
-override NAME := $(TARGET_CONFIG)
+override NAME := fnal-asic-compute-shared
+override PKGSUBDIR = $(NAME)/$(TARGET_CONFIG)
 override PKGSUBDIR = $(NAME)
 override VERSION := $(shell git describe --always --dirty --broken 2> /dev/null)
+
+override SRCDIR_CONFIG_FILES := $(shell cd src && find . -type f)
 override WORKDIR_BUILD = $(WORKDIR_ROOT)/build/$(NAME)/$(VERSION)
 override WORKDIR_DEPS = $(WORKDIR_ROOT)/deps
 override WORKDIR_TEST = $(WORKDIR_ROOT)/test/$(NAME)/$(VERSION)
@@ -32,7 +34,7 @@ private_clean:
 
 
 .PHONY: private_install
-private_install: $(foreach s, $(SRCS), $(DESTDIR)/$(LIBDIR)/$(PKGSUBDIR)/$(s) $(DESTDIR)/$(HOMEDIR)/$(s))
+private_install: $(foreach s, $(SRCDIR_CONFIG_FILES), $(DESTDIR)/$(LIBDIR)/$(PKGSUBDIR)/$(s) $(DESTDIR)/$(HOMEDIR)/$(s))
 	diff -r $(DESTDIR)/$(LIBDIR)/$(PKGSUBDIR) src/
 
 $(DESTDIR)/$(LIBDIR)/$(PKGSUBDIR)/%: src/%
@@ -50,7 +52,7 @@ private_test :
 .PHONY: private_uninstall
 private_uninstall:
 	@echo "Uninstalling $(NAME)"
-	@$(foreach s, $(SRCS), \
+	@$(foreach s, $(SRCDIR_CONFIG_FILES), \
 		rm -v $(DESTDIR)/$(HOMEDIR)/$(s); \
 		test ! -e $(DESTDIR)/$(HOMEDIR)/$(s); \
 		rm -dv $(dir $(DESTDIR)/$(HOMEDIR)/$(s)) 2> /dev/null || true;\

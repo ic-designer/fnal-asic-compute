@@ -1,16 +1,3 @@
-# Config
-.DELETE_ON_ERROR:
-.SUFFIXES:
-MAKEFLAGS += --no-builtin-rules
-
-# Constants
-override SRCS = \
-	.bash_profile \
-	.bashrc \
-	.local/bin/filename-search-and-replace \
-	.local/bin/install-pyenv \
-	.ssh/config
-
 # Includes
 include private.mk
 
