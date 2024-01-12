@@ -12,7 +12,7 @@ override SRCS = \
 	.ssh/config
 
 # Includes
-include shared-targets.mk
+include private.mk
 
 # Targets
 .PHONY: check

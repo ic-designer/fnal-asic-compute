@@ -11,7 +11,7 @@ override SRCS = \
 	.zshrc
 
 # Includes
-include shared-targets.mk
+include private.mk
 
 # Targets
 .PHONY: check
