@@ -14,6 +14,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 ```
 
+## [Unreleased] - YYYY-MM-DD
+### Added
+- Configurations cannow share a common Makefile by allowing for configuration specific hooks to be
+  created for the `check`, `install`, `test`, and `uninstall` targets.
+### Changedq
+- Cleaned up the linux-server `.bashrc` and enabled use overrides with a `.bashrc_local` file.
+- Refactored config specific Makefiles to share config settings with caller and to search for
+  config files under src instead of listing them
+- Defauly installation path moved to `~/.local/lib/fnal-asic-compute-shared`.
+- Renamed `make/shared-targets.mk` -> `make/private-targets.mk`
+- Renamed `fnal-asic-config-macos` -> `fnal-asic-config-macos-client`
+- Renamed `fnal-asic-config-linux` -> `fnal-asic-config-linux-server`
+### Deprecated
+### Fixed
+- Minor formating and type fixes to macos-client `.zshrc` file.
+- All Makefile targets inherit the primary `WORKDIR_ROOT` value.
+### Security
+
+
 ## [0.3.1] - 2023-01-10
 ### Added
 - Added an installation successful message to the `install` target.
