@@ -24,4 +24,4 @@ endif
 # Configuration specific targets
 export
 %:
-	$(MAKE) -C $(TARGET_CONFIG) -I $(CURDIR)/make $(MAKECMDGOALS)
+	$(MAKE) -C $(TARGET_CONFIG) -I $(CURDIR)/make $(MAKECMDGOALS) WORKDIR_ROOT=$(WORKDIR_ROOT)
