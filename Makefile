@@ -14,9 +14,9 @@ WORKDIR_ROOT := $(CURDIR)/.make
 # Configuration
 UNAME_OS:=$(shell sh -c 'uname -s 2>/dev/null')
 ifeq ($(UNAME_OS),Darwin)
-    TARGET_CONFIG := fnal-asic-macos-config
+    TARGET_CONFIG := fnal-asic-config-macos-client
 else ifeq ($(UNAME_OS),Linux)
-    TARGET_CONFIG := fnal-asic-linux-config
+    TARGET_CONFIG := fnal-asic-config-linux-server
 else
     $(error Unsupported operating system, $(UNAME_OS))
 endif
