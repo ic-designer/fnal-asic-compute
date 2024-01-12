@@ -8,7 +8,7 @@ alias ll='ls -al'
 alias kload='kinit -R || kinit -ft ~/.kerberos/$(whoami).keytab ${KRB_PRINCIPAL}; klist'
 alias ssh='kload; ssh'
 
-# path
+# paths
 pathmunge () {
     case ":${PATH}:" in
         *:"$1":*)
