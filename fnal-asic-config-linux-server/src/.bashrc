@@ -1,10 +1,8 @@
-# .bashrc for jfreden@fnal.gov
-
-# Setup Trash
+# constants
+_BASHRC_LOCAL=~/.bashrc_local
 export TRASH=${HOME}/.local/share/Trash
-export PYENV_ROOT=${HOME}/.local/lib/pyenv
 
-# Aliases
+# aliases
 alias grep='grep --color=auto'
 alias ls='ls -h --color=auto'
 alias ll='ls -al'
@@ -12,7 +10,7 @@ alias mv='mv -i'
 alias rm="deprecate_rm"
 alias del='\mkdir -p ${TRASH}; \mv --backup=t -t ${TRASH} $@'
 
-# Paths
+# paths
 pathmunge () {
     case ":${PATH}:" in
         *:"$1":*)
@@ -106,3 +104,8 @@ COLOR_USR=$'\[\e[38;5;243m\]'
 COLOR_DIR=$'\[\e[38;5;197m\]'
 COLOR_GIT=$'\[\e[38;5;022m\]'
 export PS1="[\!] ${COLOR_USR}\u@\h ${COLOR_GIT}\$(parse_git_prompt)${COLOR_DIR}\W${COLOR_DEF} -: "
+
+# local overrides
+if [[ -f ${_BASHRC_LOCAL} ]]; then
+    source ${_BASHRC_LOCAL}
+fi
