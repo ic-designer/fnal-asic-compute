@@ -1,33 +1,30 @@
-# Config
-export
-
 # Constants
 DESTDIR ?= $(error ERROR: Undefined variable DESTDIR)
 HOMEDIR ?= $(error ERROR: Undefined variable HOMEDIR)
 LIBDIR ?= $(error ERROR: Undefined variable LIBDIR)
 PREFIX ?= $(error ERROR: Undefined variable PREFIX)
+SRCDIR_ROOT ?= $(error ERROR: Undefined variable SRCDIR_ROOT)
 WORKDIR_ROOT ?= $(error ERROR: Undefined variable WORKDIR_ROOT)
 
 override NAME := fnal-asic-compute-shared
-override PKGSUBDIR = $(NAME)/$(TARGET_CONFIG)
-override PKGSUBDIR = $(NAME)
+override PKGSUBDIR = $(NAME)/$(SRCDIR_ROOT)
 override VERSION := $(shell git describe --always --dirty --broken 2> /dev/null)
-
-override SRCDIR_CONFIG_FILES := $(shell cd src && find . -type f)
-override WORKDIR_BUILD = $(WORKDIR_ROOT)/build/$(NAME)/$(VERSION)
+override SRCDIR_CONFIG_FILES := $(shell cd $(SRCDIR_ROOT)/src && find . -type f)
 override WORKDIR_DEPS = $(WORKDIR_ROOT)/deps
 override WORKDIR_TEST = $(WORKDIR_ROOT)/test/$(NAME)/$(VERSION)
 
+export
+
 # Includes
-include private-deps.mk
-include private-hooks.mk
+include make/private-deps.mk
+include make/private-hooks.mk
+-include $(SRCDIR_ROOT)/hooks.mk
 include $(BOXERBIRD.MK)
 
 # Targets
 .PHONY: private_clean
 private_clean:
 	@echo "Cleaning directories:"
-	@$(if $(wildcard $(WORKDIR_BUILD)), rm -rfv $(WORKDIR_BUILD))
 	@$(if $(wildcard $(WORKDIR_DEPS)), rm -rfv $(WORKDIR_DEPS))
 	@$(if $(wildcard $(WORKDIR_ROOT)), rm -rfv $(WORKDIR_ROOT))
 	@$(if $(wildcard $(WORKDIR_TEST)), rm -rfv $(WORKDIR_TEST))
@@ -36,12 +33,12 @@ private_clean:
 
 
 .PHONY: private_install
-private_install: $(foreach s, $(SRCDIR_CONFIG_FILES), $(DESTDIR)/$(LIBDIR)/$(PKGSUBDIR)/$(s) $(DESTDIR)/$(HOMEDIR)/$(s))
-	diff -r $(DESTDIR)/$(LIBDIR)/$(PKGSUBDIR) src/
+private_install: $(foreach f, $(SRCDIR_CONFIG_FILES), $(DESTDIR)/$(LIBDIR)/$(PKGSUBDIR)/$(f) $(DESTDIR)/$(HOMEDIR)/$(f))
+	diff -r $(DESTDIR)/$(LIBDIR)/$(PKGSUBDIR) $(SRCDIR_ROOT)/src/
 	@$(MAKE) hook-install DESTDIR=$(abspath $(WORKDIR_TEST))/$(PKGSUBDIR)
 	@echo "Installation complete"
 
-$(DESTDIR)/$(LIBDIR)/$(PKGSUBDIR)/%: src/%
+$(DESTDIR)/$(LIBDIR)/$(PKGSUBDIR)/%: $(SRCDIR_ROOT)/src/%
 	$(boxerbird::install-as-copy)
 
 $(DESTDIR)/$(HOMEDIR)/%: $(DESTDIR)/$(LIBDIR)/$(PKGSUBDIR)/%
