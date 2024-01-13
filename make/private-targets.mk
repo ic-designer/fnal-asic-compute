@@ -19,7 +19,8 @@ override WORKDIR_DEPS = $(WORKDIR_ROOT)/deps
 override WORKDIR_TEST = $(WORKDIR_ROOT)/test/$(NAME)/$(VERSION)
 
 # Includes
-include deps.mk
+include private-deps.mk
+include private-hooks.mk
 include $(BOXERBIRD.MK)
 
 # Targets
@@ -30,12 +31,15 @@ private_clean:
 	@$(if $(wildcard $(WORKDIR_DEPS)), rm -rfv $(WORKDIR_DEPS))
 	@$(if $(wildcard $(WORKDIR_ROOT)), rm -rfv $(WORKDIR_ROOT))
 	@$(if $(wildcard $(WORKDIR_TEST)), rm -rfv $(WORKDIR_TEST))
+	@echo "Cleaning complete"
 	@echo
 
 
 .PHONY: private_install
 private_install: $(foreach s, $(SRCDIR_CONFIG_FILES), $(DESTDIR)/$(LIBDIR)/$(PKGSUBDIR)/$(s) $(DESTDIR)/$(HOMEDIR)/$(s))
 	diff -r $(DESTDIR)/$(LIBDIR)/$(PKGSUBDIR) src/
+	@$(MAKE) hook-install DESTDIR=$(abspath $(WORKDIR_TEST))/$(PKGSUBDIR)
+	@echo "Installation complete"
 
 $(DESTDIR)/$(LIBDIR)/$(PKGSUBDIR)/%: src/%
 	$(boxerbird::install-as-copy)
@@ -46,7 +50,10 @@ $(DESTDIR)/$(HOMEDIR)/%: $(DESTDIR)/$(LIBDIR)/$(PKGSUBDIR)/%
 
 .PHONY: private_test
 private_test :
-	@$(MAKE) install uninstall DESTDIR=$(abspath $(WORKDIR_TEST))/$(PKGSUBDIR)
+	@$(MAKE) install DESTDIR=$(abspath $(WORKDIR_TEST))/$(PKGSUBDIR)
+	@$(MAKE) uninstall DESTDIR=$(abspath $(WORKDIR_TEST))/$(PKGSUBDIR)
+	@$(MAKE) hook-test DESTDIR=$(abspath $(WORKDIR_TEST))/$(PKGSUBDIR)
+	@echo "Testing complete"
 
 
 .PHONY: private_uninstall
@@ -60,4 +67,6 @@ private_uninstall:
 	@\rm -rdfv $(DESTDIR)/$(LIBDIR)/$(PKGSUBDIR) 2> /dev/null || true
 	@\rm -dv $(dir $(DESTDIR)/$(LIBDIR)/$(PKGSUBDIR)) 2> /dev/null || true
 	@\rm -dv $(DESTDIR)/$(LIBDIR) 2> /dev/null || true
+	@$(MAKE) hook-uninstall DESTDIR=$(abspath $(WORKDIR_TEST))/$(PKGSUBDIR)
+	@echo "Uninstallation complete"
 	@echo

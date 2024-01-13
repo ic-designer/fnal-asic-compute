@@ -1,25 +1,18 @@
 # Includes
-include private.mk
+include private-targets.mk
 
 # Targets
 .PHONY: check
 check: private_test
-	-@$(MAKE) -C $(VNCTOOLS_REPO) check WORKDIR_ROOT=$(WORKDIR_ROOT)
 
 .PHONY: clean
 clean: private_clean
 
 .PHONY: install
-install: $(VNCTOOLS_REPO)
-	@$(MAKE) private_install
-	@$(MAKE) -C $(VNCTOOLS_REPO) install WORKDIR_ROOT=$(WORKDIR_ROOT)
-	@echo "Installation successful"
+install: private_install
 
 .PHONY: test
 test: private_test
-	-@$(MAKE) -C $(VNCTOOLS_REPO) test WORKDIR_ROOT=$(WORKDIR_ROOT)
 
 .PHONY: uninstall
-uninstall: $(VNCTOOLS_REPO)
-	@$(MAKE) -C $(VNCTOOLS_REPO) uninstall WORKDIR_ROOT=$(WORKDIR_ROOT)
-	@$(MAKE) private_uninstall
+uninstall: private_uninstall

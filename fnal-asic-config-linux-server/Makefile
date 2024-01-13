@@ -1,5 +1,5 @@
 # Includes
-include private.mk
+include private-targets.mk
 
 # Targets
 .PHONY: check
