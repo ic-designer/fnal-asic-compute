@@ -14,7 +14,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 ```
 
-## [0.4.0] - 2023-01-04
+## [0.5.0] - 2024-01-15
+### Changed
+- Changed the Kerberos username variable used in `kload` alias `KRB_PRINCIPAL` -> `KRB5_PRINCIPAL`.
+
+
+## [0.4.0] - 2023-01-14
 ### Added
 - Configurations can now share a common Makefile which allows for configuration specific
   customizations to added using hook targets: `hook-check`, `hook-install`, `hook-test`, and
