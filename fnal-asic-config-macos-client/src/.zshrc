@@ -5,7 +5,7 @@ export KRB5_CONFIG=~/.kerberos/krb5.conf
 # aliases
 alias ls='ls --color=always'
 alias ll='ls -al'
-alias kload='kinit -R || kinit -ft ~/.kerberos/$(whoami).keytab ${KRB_PRINCIPAL}; klist'
+alias kload='kinit -R || kinit -ft ~/.kerberos/$(whoami).keytab ${KRB5_PRINCIPAL}; klist'
 alias ssh='kload; ssh'
 
 # paths
