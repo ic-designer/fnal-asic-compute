@@ -1,8 +1,8 @@
 # Constants
+CONFIGURATOR_RULES_BRANCH := main
+
 WORKDIR_ROOT ?= $(error ERROR: Undefined variable WORKDIR_ROOT)
 WORKDIR_DEPS = $(WORKDIR_ROOT)/deps
-
-CONFIGURATOR_RULES_BRANCH := main
 
 # Dependencies
 override CONFIGURATOR_RULES.MK := $(WORKDIR_DEPS)/make-configurator-rules/make-configurator-rules.mk

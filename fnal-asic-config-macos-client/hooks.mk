@@ -1,11 +1,9 @@
 # Constants
 VNCTOOLS_VERSION := 0.3.1
+
 WORKDIR_ROOT ?= $(error ERROR: Undefined variable WORKDIR_ROOT)
 WORKDIR_DEPS ?= $(error ERROR: Undefined variable WORKDIR_DEPS)
 
-# Constants
-WORKDIR_DEPS ?= $(error ERROR: Undefined variable WORKDIR_DEPS)
-WORKDIR_ROOT ?= $(error ERROR: Undefined variable WORKDIR_ROOT)
 
 # Dependencies
 override VNCTOOLS_REPO := $(WORKDIR_DEPS)/bash-vnctools-$(VNCTOOLS_VERSION)
