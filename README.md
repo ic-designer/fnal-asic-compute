@@ -42,8 +42,8 @@ The Linux server configuration provides the following user configuation files:
 The user configuration files can installed using the code snippet below.
 
 ```bash
-curl -sL https://github.com/ic-designer/fnal-asic-compute/archive/refs/tags/0.3.1.tar.gz | tar xz
-make -C fnal-asic-compute-0.3.1 install
+curl -sL https://github.com/ic-designer/fnal-asic-compute/archive/refs/tags/0.4.0.tar.gz | tar xz
+make -C fnal-asic-compute-0.4.0 install
 ```
 
 The Makefile will use information about the operating system to determine which configuration to
