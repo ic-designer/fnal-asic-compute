@@ -22,7 +22,7 @@ endif
 SRCDIR_ROOT = $(TARGET_CONFIG)
 
 # Includes
-include make/private-targets.mk
+include make/private.mk
 
 # Targets
 .PHONY: check

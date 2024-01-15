@@ -1,4 +1,0 @@
-# Hooks
-.PHONY: hook-%
-hook-%:
-	@:
