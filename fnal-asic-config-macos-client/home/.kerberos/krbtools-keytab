@@ -1,30 +1,57 @@
 #!/usr/bin/env bash
 (
+    # config
     set -euo pipefail
+    set +o allexport
+    unset -v PASSWORD_ALPHA PASSWORD_BETA
+    trap "unset -v PASSWORD_ALPHA PASSWORD_BETA" SIGINT SIGTERM ERR EXIT
 
-    KTFILE=~/.kerberos/$(whoami).keytab
-    echo "Setting up kerberos keytab file..."
-    if [[ -f ${KTFILE} ]]; then
-        echo "ERROR: file already exists ${KTFILE}, please manually backup and remove file."
-        exit 1
+    # entry setup
+    echo "Setting up kerberos keytab..."
+    if [[ -n ${KRB5_KTNAME++} ]]; then
+        echo "INFO: Using keytab file ${KRB5_KTNAME} defined in environment variable KRB5_KTNAME"
+    else
+        KRB5_KTNAME=~/.kerberos/$(whoami).keytab
     fi
 
     if [[ -n ${KRB5_PRINCIPAL++} ]]; then
-        echo "Using principal ${KRB5_PRINCIPAL} from environment variable KRB5_PRINCIPAL"
+        echo "INFO: Using principal ${KRB5_PRINCIPAL} defined in environment variable KRB5_PRINCIPAL"
     else
         read -p "Enter kerberos principal in the form USER@REALM: " KRB5_PRINCIPAL
     fi
-
     if [[ -z ${KRB5_PRINCIPAL} ]]; then
-        echo "ERROR: kerberos principal is blank"
+        echo "ERROR: kerberos principal is blank."
         exit 1
     fi
-    ktutil -k ${KTFILE} add -p ${KRB5_PRINCIPAL} -e aes256-cts-hmac-sha1-96 -V 1
 
-    echo ""
-    echo "Generating keytab file..."
-    echo "    Filename: ${KTFILE}"
+    # password
+    for ii in {1..3}; do
+        read -rsp "Password: " PASSWORD_ALPHA; echo ""
+        if [[ -z ${PASSWORD_ALPHA} ]]; then
+            echo "ERROR: password is blank."
+        else
+            read -rsp "Confirm: " PASSWORD_BETA; echo ""
+            if [[ ${PASSWORD_ALPHA} != ${PASSWORD_BETA} ]]; then
+                echo "ERROR: Passwords do not match."
+            else
+                break
+            fi
+        fi
+
+        if [[ ii -eq 3 ]]; then
+            exit 1
+        fi
+    done
+
+    # udpate keytab
+    echo "Updating keytab file..."
+    echo "    Filename: ${KRB5_KTNAME}"
     echo "    Principal: ${KRB5_PRINCIPAL}"
+    if [[ $(ktutil -k ${KRB5_KTNAME} remove -p ${KRB5_PRINCIPAL} 2>/dev/null) -eq 0 ]]; then
+        echo "INFO: Existing entries for ${KRB5_PRINCIPAL} removed from ${KRB5_KTNAME}"
+    fi
     echo ""
-    echo "${KTFILE}: `cat ${KTFILE}`"
+    ktutil -k ${KRB5_KTNAME} add -p ${KRB5_PRINCIPAL} -w ${PASSWORD_ALPHA} -e aes256-cts-hmac-sha1-96 -V 1
+    unset -v PASSWORD_ALPHA PASSWORD_BETA
+    ktutil -k ${KRB5_KTNAME} list
 )
