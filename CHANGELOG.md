@@ -14,6 +14,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 ```
 
+## [0.6.0] - 2024-01-15
+### Changed
+- Sorted file from the configuratio `src` directories into explicit `bin` and `home` directories.
+
+
 ## [0.5.0] - 2024-01-15
 ### Changed
 - Changed the Kerberos username variable used in `kload` alias `KRB_PRINCIPAL` -> `KRB5_PRINCIPAL`.
