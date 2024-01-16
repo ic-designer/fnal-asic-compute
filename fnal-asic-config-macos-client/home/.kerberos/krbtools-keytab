@@ -9,22 +9,22 @@
         exit 1
     fi
 
-    if [[ -n ${KRB_PRINCIPAL++} ]]; then
-        echo "Using principal ${KRB_PRINCIPAL} from environment variable KRB_PRINCIPAL"
+    if [[ -n ${KRB5_PRINCIPAL++} ]]; then
+        echo "Using principal ${KRB5_PRINCIPAL} from environment variable KRB5_PRINCIPAL"
     else
-        read -p "Enter kerberos principal in the form USER@REALM: " KRB_PRINCIPAL
+        read -p "Enter kerberos principal in the form USER@REALM: " KRB5_PRINCIPAL
     fi
 
-    if [[ -z ${KRB_PRINCIPAL} ]]; then
+    if [[ -z ${KRB5_PRINCIPAL} ]]; then
         echo "ERROR: kerberos principal is blank"
         exit 1
     fi
-    ktutil -k ${KTFILE} add -p ${KRB_PRINCIPAL} -e aes256-cts-hmac-sha1-96 -V 1
+    ktutil -k ${KTFILE} add -p ${KRB5_PRINCIPAL} -e aes256-cts-hmac-sha1-96 -V 1
 
     echo ""
     echo "Generating keytab file..."
     echo "    Filename: ${KTFILE}"
-    echo "    Principal: ${KRB_PRINCIPAL}"
+    echo "    Principal: ${KRB5_PRINCIPAL}"
     echo ""
     echo "${KTFILE}: `cat ${KTFILE}`"
 )
