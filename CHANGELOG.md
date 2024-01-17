@@ -14,16 +14,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 ```
 
-## [Unreleased] - YYYY-MM-DD
+## [0.7.0] - 2024-01-17
 ### Added
 - The `KRB5_KTNAME` variable added to create a default keytab file.
 ### Changed
-### Deprecated
+- The installation path variable `DESTDIR` must now be specified as an absolute path.
 ### Fixed
 - The `KRB_PRINCIPAL` variable was not updated to `KRB5_PRINCIPAL` in the `krbtools-keytab` script.
 - The krbtools-keytab script will now replace existing entries in the keytab file when updating
   changine the password instead erroring out and forcing user to delete the file.
-### Security
+- A computer update caused the prompt to quit updating git branch
 
 
 ## [0.6.0] - 2024-01-15

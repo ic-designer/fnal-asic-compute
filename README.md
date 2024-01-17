@@ -13,8 +13,8 @@ supported configurations include the following:
 The user configuration files can installed using the code snippet below.
 
 ```bash
-curl -sL https://github.com/ic-designer/fnal-asic-compute/archive/refs/tags/0.6.0.tar.gz | tar xz
-make -C fnal-asic-compute-0.6.0 install
+curl -sL https://github.com/ic-designer/fnal-asic-compute/archive/refs/tags/0.7.0.tar.gz | tar xz
+make -C fnal-asic-compute-0.7.0 install
 ```
 
 The Makefile will use information about the operating system to determine which configuration to
