@@ -98,7 +98,6 @@ function parse_git_status {
 	fi
 }
 
-
 COLOR_DEF=$'\[\e[0m\]'
 COLOR_USR=$'\[\e[38;5;243m\]'
 COLOR_DIR=$'\[\e[38;5;197m\]'
