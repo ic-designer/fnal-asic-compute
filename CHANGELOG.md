@@ -14,6 +14,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 ```
 
+## [0.7.1] - 2024-01-18
+### Changed
+- Updated the vnctools version number to 0.3.3
+
+
 ## [0.7.0] - 2024-01-17
 ### Added
 - The `KRB5_KTNAME` variable added to create a default keytab file.
