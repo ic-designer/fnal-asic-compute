@@ -1,5 +1,5 @@
 # Constants
-VNCTOOLS_VERSION := 0.3.1
+VNCTOOLS_VERSION := 0.3.3
 
 WORKDIR_ROOT ?= $(error ERROR: Undefined variable WORKDIR_ROOT)
 WORKDIR_DEPS ?= $(error ERROR: Undefined variable WORKDIR_DEPS)
