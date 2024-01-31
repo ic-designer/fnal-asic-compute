@@ -1,17 +1,6 @@
 # Constants
-VNCTOOLS_VERSION := 0.3.4
-
+VNCTOOLS_REPO ?= $(error ERROR: Undefined variable VNCTOOLS_REPO)
 WORKDIR_ROOT ?= $(error ERROR: Undefined variable WORKDIR_ROOT)
-WORKDIR_DEPS ?= $(error ERROR: Undefined variable WORKDIR_DEPS)
-
-# Dependencies
-override VNCTOOLS_REPO := $(WORKDIR_DEPS)/bash-vnctools-$(VNCTOOLS_VERSION)
-$(VNCTOOLS_REPO):
-	@echo "Loading vnctools..."
-	mkdir -p $(WORKDIR_DEPS)
-	curl -sL https://github.com/ic-designer/bash-vnctools/archive/refs/tags/$(VNCTOOLS_VERSION).tar.gz | tar xz -C $(WORKDIR_DEPS)
-	test -d $@
-	@echo
 
 # Targets
 .PHONY: hook-install

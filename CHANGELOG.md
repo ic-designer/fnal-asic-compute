@@ -14,6 +14,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 ```
 
+## [Unreleased] - YYYY-MM-DD
+### Added
+### Changed
+### Deprecated
+### Fixed
+- Moved vnctools clone command out of `hooks.mk` and into `deps.mk`
+### Security
+
+
 ## [0.7.2] - 2024-01-18
 ### Changed
 - Updated the vnctools version number to 0.3.4
