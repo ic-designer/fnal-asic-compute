@@ -10,6 +10,11 @@ alias mv='mv -i'
 alias rm="deprecate_rm"
 alias del='\mkdir -p ${TRASH}; \mv --backup=t -t ${TRASH} $@'
 
+# config
+if xhost >/dev/null 2>&1; then
+	xset -b r
+fi
+
 # paths
 pathmunge () {
     case ":${PATH}:" in

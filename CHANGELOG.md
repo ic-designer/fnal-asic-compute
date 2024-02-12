@@ -14,6 +14,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 ```
 
+## [Unreleased] - YYYY-MM-DD
+### Added
+### Changed
+### Deprecated
+### Fixed
+- For linux client configuration, turned off bell and enabled autorepear
+### Security
+
+
 ## [0.7.3] - 2024-02-10
 ### Changed
 - Updated vnctools version 0.3.4 -> 0.4.0
