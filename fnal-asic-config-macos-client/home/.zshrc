@@ -4,10 +4,9 @@ export KRB5_CONFIG=~/.kerberos/krb5.conf
 export KRB5_KTNAME=~/.kerberos/$(whoami).keytab
 
 # aliases
-alias ls='ls --color=always'
-alias ll='ls -al'
 alias kload='kinit -R || kinit -ft ${KRB5_KTNAME} ${KRB5_PRINCIPAL}; klist'
-alias ssh='kload; ssh'
+alias ll='ls -al'
+alias ls='ls --color=always'
 
 # paths
 pathmunge () {

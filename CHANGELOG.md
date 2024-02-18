@@ -17,6 +17,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased] - YYYY-MM-DD
 ### Added
 ### Changed
+- removed alias for `ssh` where `kload` was prepended to the command since executables don't
+  recognize the aliases.
 ### Deprecated
 ### Fixed
 - For linux client configuration, turned off bell and enabled autorepear
