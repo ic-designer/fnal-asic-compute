@@ -14,15 +14,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 ```
 
-## [Unreleased] - YYYY-MM-DD
-### Added
+## [0.7.4] - 2024-02-19
 ### Changed
 - removed alias for `ssh` where `kload` was prepended to the command since executables don't
   recognize the aliases.
-### Deprecated
+- Updated vnctools version 0.4.0 -> 0.4.1
 ### Fixed
-- For linux client configuration, turned off bell and enabled autorepear
-### Security
+- For linux client configuration, turned off bell and enabled autorepeat
 
 
 ## [0.7.3] - 2024-02-10
