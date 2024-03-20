@@ -14,6 +14,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 ```
 
+## [Unreleased] - YYYY-MM-DD
+### Added
+- .zshrc now loads kerberos tokens when sourced.
+- .zshrc now munges a command for loading kerberos token to cron.
+### Changed
+### Deprecated
+### Fixed
+### Security
+
+
 ## [0.7.4] - 2024-02-19
 ### Changed
 - removed alias for `ssh` where `kload` was prepended to the command since executables don't
