@@ -8,3 +8,5 @@
     (It may be easiest to just make this a limiation and throw a warning when HOMEDIR is different
     than HOME). For instance, in `home/.zshrc`, `export KRB5_CONFIG=~/.kerberos/krb5.conf` is a hard
     coded path.
+-   BUG: If `.zshrc` file already exists, the installer is not able to overwrite the file with the
+    correct symbolic link
