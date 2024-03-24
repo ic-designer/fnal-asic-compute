@@ -41,7 +41,9 @@ cronmunge "0 */2 * * * kinit -R || kinit -ft $(realpath ${KRB5_KTNAME}) ${KRB5_P
 # kerberos
 kload
 
-# prompt
+# git
+autoload -Uz compinit && compinit
+
 function parse_git_branch () {
     git branch 2> /dev/null | sed -n -e 's/^\* \(.*\)/\1/p'
 }
