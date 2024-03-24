@@ -10,3 +10,4 @@
     coded path.
 -   BUG: If `.zshrc` file already exists, the installer is not able to overwrite the file with the
     correct symbolic link
+-   Should Linux and MacOS configurations both be in this repo?

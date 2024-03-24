@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - .zshrc now loads kerberos tokens when sourced.
 - .zshrc now munges a command for loading kerberos token to cron.
 - Git Tab completion added for linux server configurations.
+- Git Tab completion added for MacOS server configurations.
 ### Changed
 ### Deprecated
 ### Fixed
