@@ -18,6 +18,7 @@ alias del='\mkdir -p ${TRASH}; \mv --backup=t -t ${TRASH} $@'
 if xhost >/dev/null 2>&1; then
 	xset -b r
 fi
+xset r on
 
 # paths
 pathmunge () {
