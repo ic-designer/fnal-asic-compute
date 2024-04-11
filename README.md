@@ -2,24 +2,33 @@
 
 [![Makefile CI](https://github.com/ic-designer/fnal-asic-compute/actions/workflows/makefile.yml/badge.svg)](https://github.com/ic-designer/fnal-asic-compute/actions/workflows/makefile.yml)
 
+FNAL ASIC Compute provides standardized configurations for the following FNAL ASIC
+computing systems:
+- MacOS VNC Client
+- Linux VNC Server
 
-FNAL ASIC Compute provides user configuration files for FNAL ASIC computing devices. The current
-supported configurations include the following:
-- MacOS client running VNC
-- Linux servers supporting VNC
+## Features
+
+The MacOS VNC Client currently supports the following features:
+- Automatic Kerberos authentification and token renewal without password prompts.
+- Manage VNC connections from FNAL MacOS VNC Clients to FNAL Linux VNC Servers with
+  the `vnctools` scripts.
+- Display git repo information in the command prompt.
+- Standard FNAL Kerberos and SSH configurations.
+
 
 ## Installation
 
-The user configuration files can installed using the code snippet below.
+The configurations can installed using the following code snippet:
 
 ```bash
 curl -sL https://github.com/ic-designer/fnal-asic-compute/archive/refs/tags/0.7.4.tar.gz | tar xz
 make -C fnal-asic-compute-0.7.4 install
 ```
 
-The Makefile will use information about the operating system to determine which configuration to
-install. As shown below, the Makefile first determines the operating system, then passes the
-target to the configuration specific target.
+The Makefile retrieves information from the operating system to determine which
+configuration to install. As shown below, the Makefile first determines the operating
+system, then passes the target to the configuration specific target.
 
 ```make
 UNAME_OS:=$(shell sh -c 'uname -s 2>/dev/null')
@@ -35,7 +44,8 @@ SRCDIR_ROOT = $(TARGET_CONFIG)
 
 ## Configurations
 
-### MacOS Client
+### MacOS VNC Client
+
 
 The macOS client configuration provides the following user configuation files:
 - `~/.kerberos/krb5.conf` - FNAL Kerberos Configuration for MacOS
@@ -51,7 +61,7 @@ The MacOS client configuration also installs `vnctools` to help manage VNC conne
 
 [VNC Tools Command Reference](https://github.com/ic-designer/bash-vnctools/blob/d60f8c8697f0d56824c01a4dd6593d126c65e9dd/README.md)
 
-### Linux Server
+### Linux VNC Server
 
 The Linux server configuration provides the following user configuation files:
 - `~/.local/bin/filename-search-and-replace` - Bash script for renaming files using search and replace.
@@ -62,26 +72,15 @@ The Linux server configuration provides the following user configuation files:
 
 ## Make Targets
 
-The supported make targets are shown below.
-- `check` - Performs a staged `install` and `uninstall` in a test directory.
-- `clean` - Deletes all internal build files.
-- `install` - Installs copies of the configuration files.
-- `test` - Same as `check`.
-- `uninstall` - Uninstalls the configuration files.
+Run `make` help to list the supported make targets.
 
-```make
-.PHONY: check
-check: private_test
-
-.PHONY: clean
-clean: private_clean
-
-.PHONY: install
-install: private_install
-
-.PHONY: test
-test: private_test
-
-.PHONY: uninstall
-uninstall: private_uninstall
+```
+$ make help
+Available targets:
+   check                   Performs a mock installation and uninstallation.
+   clean                   Delete all files created by make.
+   help                    Provides this help message
+   install                 Install the configuration for the current OS
+   test                    Performs a mock installation and uninstallation.
+   uninstall               Unistalls the configuration for the current OS
 ```
