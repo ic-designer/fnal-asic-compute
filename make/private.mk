@@ -1,7 +1,9 @@
 # Config
 .DELETE_ON_ERROR:
 .SUFFIXES:
-MAKEFLAGS += --no-builtin-rules
+
+.DEFAULT_GOAL := help
+MAKEFLAGS += --no-builtin-rules --no-print-directory
 
 # Constants
 override NAME := fnal-asic-compute-shared

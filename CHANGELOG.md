@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Git status flags added to MacOS Client prompt.
 - Updated version of make-boxerbird adds a git-hook preventing push to main.
 ### Changed
+- Default make target now prints help message.
 - Standardized the dependency branch variables to the following:
   - `BOXERBIRD_BRANCH` - Branch used for the make-boxerbird tools.
   - `CONFIGURATOR_RULES_BRANCH` - Branch used for the a make-configurator rules.
