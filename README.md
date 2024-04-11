@@ -22,8 +22,8 @@ The MacOS VNC Client currently supports the following features:
 The configurations can installed using the following code snippet:
 
 ```bash
-curl -sL https://github.com/ic-designer/fnal-asic-compute/archive/refs/tags/0.7.4.tar.gz | tar xz
-make -C fnal-asic-compute-0.7.4 install
+curl -sL https://github.com/ic-designer/fnal-asic-compute/archive/refs/tags/0.8.0.tar.gz | tar xz
+make -C fnal-asic-compute-0.8.0 install
 ```
 
 The Makefile retrieves information from the operating system to determine which
