@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 ```
 
-## [Unreleased] - YYYY-MM-DD
+## [0.8.0] - 2024-04-11
 ### Added
 - .zshrc now loads kerberos tokens when sourced.
 - .zshrc now munges a command for loading kerberos token to cron.
@@ -32,10 +32,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `BOXERBIRD_BRANCH` - Branch used for the make-boxerbird tools.
   - `CONFIGURATOR_RULES_BRANCH` - Branch used for the a make-configurator rules.
   - `VNCTOOLS_BRANCH` - Branch used for the vntools.
-### Deprecated
 ### Fixed
 - For linux client configuration, turned off bell and enabled autorepeat
-### Security
 
 
 ## [0.7.4] - 2024-02-19
