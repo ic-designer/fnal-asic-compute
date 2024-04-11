@@ -22,8 +22,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Git Tab completion added for MacOS Client configurations.
 - Git status flags added to Linux Server prompt.
 - Git status flags added to MacOS Client prompt.
-
+- Updated version of make-boxerbird adds a git-hook preventing push to main.
 ### Changed
+- Updated the README
+  - Added link to vnctools repo readme to the readme for this repo.
+  - Added feature list to the MacOS configuration.
+- Default make target now prints help message.
+- Standardized the dependency branch variables to the following:
+  - `BOXERBIRD_BRANCH` - Branch used for the make-boxerbird tools.
+  - `CONFIGURATOR_RULES_BRANCH` - Branch used for the a make-configurator rules.
+  - `VNCTOOLS_BRANCH` - Branch used for the vntools.
 ### Deprecated
 ### Fixed
 - For linux client configuration, turned off bell and enabled autorepeat
