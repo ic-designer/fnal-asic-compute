@@ -14,6 +14,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 ```
 
+## [Unreleased] - YYYY-MM-DD
+### Added
+### Changed
+### Deprecated
+### Fixed
+- Fixed autorepeat `xset r on` call in linux configuaration so only executed when xhost
+  can be resolved so that xhost error isn't displayed.
+### Security
+
+
 ## [0.8.0] - 2024-04-11
 ### Added
 - .zshrc now loads kerberos tokens when sourced.
