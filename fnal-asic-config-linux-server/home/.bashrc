@@ -40,6 +40,9 @@ if [[ -d $PYENV_ROOT ]]; then
 	eval "$(pyenv virtualenv-init -)"
 fi
 
+# Change the power management screen sessing
+gsettings set org.gnome.desktop.session idle-delay 600 > /dev/null 2>&1
+gsettings set org.gnome.desktop.screensaver lock-delay 0 > /dev/null 2>&1
 
 # Improve usability of Cadence tools
 gsettings set org.cinnamon.desktop.keybindings.wm switch-group [] > /dev/null 2>&1

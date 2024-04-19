@@ -16,6 +16,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] - YYYY-MM-DD
 ### Added
+- Disabled lock screen on Linux Server through .bashrc
+- Changed the Disabled lock screen on Linux Server through .bashrc
 ### Changed
 ### Deprecated
 ### Fixed
