@@ -4,7 +4,7 @@ export KRB5_CONFIG=~/.kerberos/krb5.conf
 export KRB5_KTNAME=~/.kerberos/$(whoami).keytab
 
 # aliases
-alias kload='kinit -R || kinit -ft ${KRB5_KTNAME} ${KRB5_PRINCIPAL}; klist'
+alias kload='/usr/bin/kinit -R || /usr/bin/kinit -ft ${KRB5_KTNAME} ${KRB5_PRINCIPAL}; /usr/bin/klist'
 alias ll='ls -al'
 alias ls='ls --color=always'
 
@@ -36,7 +36,7 @@ cronmunge () {
             ;;
     esac
 }
-cronmunge "0 */2 * * * kinit -R || kinit -ft $(realpath ${KRB5_KTNAME}) ${KRB5_PRINCIPAL}" "#TAG:kesrberos-tokens"
+cronmunge "0 */2 * * * /usr/bin/kinit -R || /usr/bin/kinit -ft $(realpath ${KRB5_KTNAME}) ${KRB5_PRINCIPAL}" "#TAG:kesrberos-tokens"
 
 # kerberos
 kload

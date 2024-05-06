@@ -21,6 +21,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 ### Deprecated
 ### Fixed
+- Fixed kerberos issue where homebrew installations change the kerberos commands by
+  explicitly call the binaries from `/usr/bin`
 - Fixed autorepeat `xset r on` call in linux configuaration so only executed when xhost
   can be resolved so that xhost error isn't displayed.
 - MacOS Client SSH config now includes both `*.fnal.gov` and `*.FNAL.GOV`.
