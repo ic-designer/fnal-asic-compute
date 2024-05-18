@@ -19,6 +19,7 @@ if xhost >/dev/null 2>&1; then
 	xset -b r
     xset r on
 fi
+ulimit -u 2062287
 
 # paths
 pathmunge () {

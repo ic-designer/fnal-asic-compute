@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Disabled lock screen on Linux Server through .bashrc
 - Changed the Disabled lock screen on Linux Server through .bashrc
+- increased the number of max user processes from 4096 to 2062287
 ### Changed
 ### Deprecated
 ### Fixed
