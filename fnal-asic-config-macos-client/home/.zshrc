@@ -4,7 +4,7 @@ export KRB5_CONFIG=~/.kerberos/krb5.conf
 export KRB5_KTNAME=~/.kerberos/$(whoami).keytab
 
 # aliases
-alias kload='/usr/bin/kinit -R || /usr/bin/kinit -ft ${KRB5_KTNAME} ${KRB5_PRINCIPAL}; /usr/bin/klist'
+alias kload='/usr/bin/kinit -R || /usr/bin/kinit -ft ${KRB5_KTNAME} ${KRB5_PRINCIPAL}; /usr/bin/klist -v'
 alias ll='ls -al'
 alias ls='ls --color=always'
 
@@ -20,23 +20,6 @@ pathmunge () {
 }
 pathmunge ~/.local/bin
 pathmunge .
-
-#cron
-cronmunge () {
-    job=$1
-    tag=$2
-
-    cronjobs=$(crontab -l 2>/dev/null)
-    case "$cronjobs" in
-        *"$job $tag"*)
-            ;;
-        *)
-            filtered=$(crontab -l 2>/dev/null || true | grep -v "$tag")
-            (echo "$filtered"; echo "$job $tag") | crontab -
-            ;;
-    esac
-}
-cronmunge "0 */2 * * * /usr/bin/kinit -R || /usr/bin/kinit -ft $(realpath ${KRB5_KTNAME}) ${KRB5_PRINCIPAL}" "#TAG:kesrberos-tokens"
 
 # kerberos
 kload

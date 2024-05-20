@@ -10,7 +10,7 @@ computing systems:
 ## Features
 
 The MacOS VNC Client currently supports the following features:
-- Automatic Kerberos authentification and token renewal without password prompts.
+- Automatic Kerberos authentication and token renewal without password prompts.
 - Manage VNC connections from FNAL MacOS VNC Clients to FNAL Linux VNC Servers with
   the `vnctools` scripts.
 - Display git repo information in the command prompt.
@@ -47,15 +47,15 @@ SRCDIR_ROOT = $(TARGET_CONFIG)
 ### MacOS VNC Client
 
 
-The macOS client configuration provides the following user configuation files:
+The macOS client configuration provides the following user configuration files:
 - `~/.kerberos/krb5.conf` - FNAL Kerberos Configuration for MacOS
 - `~/.kerberos/krbtools-keytab` - Helper script to generate keytab file needed for passwordless authentication.
 - `~/.ssh/config` - FNAL SSH client configurations.
 - `~/.zshrc` - Base zsh run command file.
 
-The envirnment variables provided below are also supported. These variables can be uniquely set
+The environment variables provided below are also supported. These variables can be uniquely set
 for each user by adding to the override file `~/.zshrc_local`.
-- `KRB5_PRINCIPAL` - Overrides the default kerebros principal if defined.
+- `KRB5_PRINCIPAL` - Overrides the default kerberos principal if defined.
 
 The MacOS client configuration also installs `vnctools` to help manage VNC connections.
 
@@ -63,7 +63,7 @@ The MacOS client configuration also installs `vnctools` to help manage VNC conne
 
 ### Linux VNC Server
 
-The Linux server configuration provides the following user configuation files:
+The Linux server configuration provides the following user configuration files:
 - `~/.local/bin/filename-search-and-replace` - Bash script for renaming files using search and replace.
 - `~/.local/bin/isntall-pyenv` - Bash scrip to help install pyenv.
 - `~/.ssh/config` - FNAL SSH server configurations.
@@ -82,5 +82,5 @@ Available targets:
    help                    Provides this help message
    install                 Install the configuration for the current OS
    test                    Performs a mock installation and uninstallation.
-   uninstall               Unistalls the configuration for the current OS
+   uninstall               Uninstalls the configuration for the current OS
 ```
