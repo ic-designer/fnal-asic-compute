@@ -4,7 +4,7 @@ export KRB5_CONFIG=~/.kerberos/krb5.conf
 export KRB5_KTNAME=~/.kerberos/$(whoami).keytab
 
 # aliases
-alias kload='/usr/bin/kinit -R || /usr/bin/kinit -ft ${KRB5_KTNAME} ${KRB5_PRINCIPAL}; /usr/bin/klist'
+alias kload='/usr/bin/kinit -R || /usr/bin/kinit -ft ${KRB5_KTNAME} ${KRB5_PRINCIPAL}; /usr/bin/klist -v'
 alias ll='ls -al'
 alias ls='ls --color=always'
 
