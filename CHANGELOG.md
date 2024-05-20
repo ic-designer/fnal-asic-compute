@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Changed the Disabled lock screen on Linux Server through .bashrc
 - increased the number of max user processes from 4096 to 2062287
 ### Changed
+- Migrated the hack cronjob creation from ~/.zshrc to a proper launch agent.
 ### Deprecated
 ### Fixed
 - Fixed kerberos issue where homebrew installations change the kerberos commands by
