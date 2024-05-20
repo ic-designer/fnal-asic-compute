@@ -22,7 +22,7 @@ pathmunge ~/.local/bin
 pathmunge .
 
 # kerberos
-kload
+kload > /dev/null
 
 # git
 autoload -Uz compinit && compinit
