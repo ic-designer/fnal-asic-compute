@@ -61,7 +61,7 @@ function deprecate_rm() {
 
 COLOR_DEF=$'\[\e[0m\]'
 COLOR_USR=$'\[\e[38;5;243m\]'
-COLOR_DIR=$'\[\e[38;5;197m\]'
+COLOR_DIR=$'\[\e[38;5;208m\]'
 COLOR_GIT=$'\[\e[38;5;022m\]'
 export PS1="[\!] ${COLOR_USR}\u@\h ${COLOR_GIT}\$(git_parse_prompt)${COLOR_DIR}\W${COLOR_DEF} -: "
 
