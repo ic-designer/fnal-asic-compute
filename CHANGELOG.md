@@ -23,6 +23,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Migrated the hack cronjob creation from ~/.zshrc to a proper launch agent.
 - Updated the github workflow versions
 - Updated the github workflow to allow manual triggering of runs
+- For both the Linux Server and MacOS client, the prompt directory color was changed
+  from bright red to orange. The bright red was had to see.
+- Updated VNC Tools from from 0.4.1 to 0.5.1.
 ### Deprecated
 ### Fixed
 - Fixed kerberos issue where homebrew installations change the kerberos commands by
