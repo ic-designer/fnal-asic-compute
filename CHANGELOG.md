@@ -19,6 +19,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Disabled lock screen on Linux Server through `.bashrc`.
 - Changed the Disabled lock screen on Linux Server through `.bashrc`.
 - Increased the number of max user processes from 4096 to 2062287.
+- For both the Linux Server and MacOS client, created a hook for a custom ssh config
+  file located at `~/.ssh/config.users`.
 ### Changed
 - Migrated the hack cronjob creation from ~/.zshrc to a proper launch agent.
 - Updated the github workflow versions.
