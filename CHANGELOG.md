@@ -19,7 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Disabled lock screen on Linux Server through `.bashrc`.
 - Changed the Disabled lock screen on Linux Server through `.bashrc`.
 - For both the Linux Server and MacOS client, created a hook for a custom ssh config
-  file located at `~/.ssh/config.users`.
+  file located at `~/.ssh/config_local`.
 ### Changed
 - Migrated the hack cronjob creation from ~/.zshrc to a proper launch agent.
 - Updated the github workflow versions.
@@ -27,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - For both the Linux Server and MacOS client, the prompt directory color was changed
   from bright red to orange. The bright red was had to see.
 - Updated VNC Tools from from 0.4.1 to 0.5.1.
+- Removed the github configurations from the shared ~/.ssh/config
 ### Deprecated
 ### Fixed
 - Fixed kerberos issue where homebrew installations change the kerberos commands by
