@@ -35,3 +35,12 @@ include make/deps.mk
 include make/hooks.mk
 include $(CONFIGURATOR_RULES.MK)
 -include $(SRCDIR_ROOT)/hooks.mk
+
+# Targets
+.PHONY: private_test
+private_test: test-vnctools-makefile
+	printf "\e[1;32mPassed Tests\e[0m\n"
+
+ifdef bowerbird::test::generate-runner
+    $(call bowerbird::test::generate-runner,test-vnctools-makefile,test/makefile)
+endif
