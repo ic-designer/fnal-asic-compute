@@ -20,7 +20,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Changed the Disabled lock screen on Linux Server through `.bashrc`.
 - For both the Linux Server and MacOS client, created a hook for a custom ssh config
   file located at `~/.ssh/config_local`.
+- Added an installation test that runs with the new bowerbird test runner.
 ### Changed
+- Updated the installation tools to use the new bowerbird libraries.
 - Migrated the hack cronjob creation from ~/.zshrc to a proper launch agent.
 - Updated the github workflow versions.
 - Updated the github workflow to allow manual triggering of runs.
