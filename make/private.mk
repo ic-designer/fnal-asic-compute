@@ -1,13 +1,16 @@
 # Config
 .DELETE_ON_ERROR:
 .SUFFIXES:
-
-.DEFAULT_GOAL := help
-MAKEFLAGS += --no-builtin-rules --no-print-directory
+MAKEFLAGS += --no-builtin-rules
+MAKEFLAGS += --no-builtin-variables
+MAKEFLAGS += --warn-undefined-variables
 
 # Constants
-override NAME := fnal-asic-compute-shared
-override VERSION := $(shell git describe --always --dirty --broken 2> /dev/null)
+NAME := fnal-asic-compute-shared
+VERSION := $(shell git describe --always --dirty --broken 2> /dev/null)
+WORKDIR_ROOT := $(CURDIR)/.make
+WORKDIR_DEPS = $(WORKDIR_ROOT)/deps
+WORKDIR_TEST = $(WORKDIR_ROOT)/test/$(NAME)/$(VERSION)
 
 # Paths
 DESTDIR =
@@ -15,7 +18,6 @@ HOMEDIR = $(HOME)
 PREFIX = $(HOME)/.local
 BINDIR = $(PREFIX)/bin
 LIBDIR = $(PREFIX)/lib
-WORKDIR_ROOT := $(CURDIR)/.make
 
 # Autodetect
 UNAME_OS:=$(shell sh -c 'uname -s 2>/dev/null')
@@ -31,6 +33,14 @@ SRCDIR_ROOT = $(TARGET_CONFIG)
 # Includes
 include make/deps.mk
 include make/hooks.mk
-include $(BOXERBIRD.MK)
 include $(CONFIGURATOR_RULES.MK)
 -include $(SRCDIR_ROOT)/hooks.mk
+
+# Targets
+.PHONY: private_test
+private_test: test-vnctools-makefile
+	printf "\e[1;32mPassed Tests\e[0m\n"
+
+ifdef bowerbird::test::generate-runner
+    $(call bowerbird::test::generate-runner,test-vnctools-makefile,test/makefile)
+endif
