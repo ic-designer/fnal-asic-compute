@@ -1,23 +1,27 @@
 # Constants
-BOXERBIRD_BRANCH := main
+WORKDIR_DEPS ?= $(error ERROR: Undefined variable WORKDIR_DEPS)
+
+# Load Bowerbird Dependency Tools
+BOWERBIRD_DEPS.MK := $(WORKDIR_DEPS)/bowerbird-deps/bowerbird_deps.mk
+$(BOWERBIRD_DEPS.MK):
+	@curl --silent --show-error --fail --create-dirs -o $@ -L \
+https://raw.githubusercontent.com/ic-designer/make-bowerbird-deps/\
+main/src/bowerbird-deps/bowerbird-deps.mk
+include $(BOWERBIRD_DEPS.MK)
+
+# Load Dependencies
+$(call bowerbird::git-dependency,$(WORKDIR_DEPS)/bowerbird-help,\
+		https://github.com/ic-designer/make-bowerbird-help.git,main,bowerbird.mk)
+$(call bowerbird::git-dependency,$(WORKDIR_DEPS)/bowerbird-githooks,\
+		https://github.com/ic-designer/make-bowerbird-githooks.git,main,bowerbird.mk)
+$(call bowerbird::git-dependency,$(WORKDIR_DEPS)/bowerbird-install-tools,\
+		https://github.com/ic-designer/make-bowerbird-install-tools.git,main,bowerbird.mk)
+$(call bowerbird::git-dependency,$(WORKDIR_DEPS)/bowerbird-test,\
+		https://github.com/ic-designer/make-bowerbird-test.git,main,bowerbird.mk)
+
+
 CONFIGURATOR_RULES_BRANCH := main
-VNCTOOLS_BRANCH := 0.5.1
-
-WORKDIR_ROOT ?= $(error ERROR: Undefined variable WORKDIR_ROOT)
-WORKDIR_DEPS = $(WORKDIR_ROOT)/deps
-
-# Dependencies
-override BOXERBIRD.MK := $(WORKDIR_DEPS)/make-boxerbird/boxerbird.mk
-$(BOXERBIRD.MK):
-	@echo "INFO: Fetching $@..."
-	git clone --config advice.detachedHead=false --depth 1 \
-			https://github.com/ic-designer/make-boxerbird.git --branch $(BOXERBIRD_BRANCH) \
-			$(WORKDIR_DEPS)/make-boxerbird
-	test -f $@
-	@echo "INFO: Fetching $@ completed."
-	@echo
-
-override CONFIGURATOR_RULES.MK := $(WORKDIR_DEPS)/make-configurator-rules/make-configurator-rules.mk
+CONFIGURATOR_RULES.MK := $(WORKDIR_DEPS)/make-configurator-rules/make-configurator-rules.mk
 $(CONFIGURATOR_RULES.MK):
 	@echo "INFO: Fetching $@..."
 	git clone --config advice.detachedHead=false --depth 1 \
@@ -27,7 +31,9 @@ $(CONFIGURATOR_RULES.MK):
 	@echo "INFO: Fetching $@ completed."
 	@echo
 
-override VNCTOOLS_REPO := $(WORKDIR_DEPS)/bash-vnctools-$(VNCTOOLS_BRANCH)
+
+VNCTOOLS_BRANCH := 0.5.1
+VNCTOOLS_REPO := $(WORKDIR_DEPS)/bash-vnctools-$(VNCTOOLS_BRANCH)
 $(VNCTOOLS_REPO):
 	@echo "INFO: Fetching $@..."
 	git clone --config advice.detachedHead=false --depth 1 \
