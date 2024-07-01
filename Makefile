@@ -1,3 +1,6 @@
+# Constants
+.DEFAULT_GOAL := help
+
 # Targets
 .PHONY: check
 ## Performs a mock installation and uninstallation.

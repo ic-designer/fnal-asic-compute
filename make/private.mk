@@ -1,8 +1,6 @@
 # Config
 .DELETE_ON_ERROR:
 .SUFFIXES:
-
-.DEFAULT_GOAL := help
 MAKEFLAGS += --no-builtin-rules --no-print-directory
 
 # Constants
