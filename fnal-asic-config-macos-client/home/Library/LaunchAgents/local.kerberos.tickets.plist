@@ -18,16 +18,7 @@
     <key>RunAtLoad</key>
     <true/>
 
-    <key>StartCalendarInterval</key>
-    <dict>
-        <key>Hour</key>
-        <integer>00</integer>
-    </dict>
-
-    <!-- <key>StandardOutPath</key>
-    <string>/tmp/local.kerberos.tickets/local.kerberos.tickets.stdout.log</string>
-
-    <key>StandardErrorPath</key>
-    <string>/tmp/local.kerberos.tickets/local.kerberos.tickets.stderr.log</string> -->
+    <key>StartInterval</key>
+    <integer>3600</integer>
 </dict>
 </plist>
