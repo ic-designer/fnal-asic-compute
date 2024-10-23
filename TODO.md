@@ -1,5 +1,6 @@
 # TODO
 
+- Consider switching from kinit to k5tart to maintain credential
 - Consider running a mock install before performing the actual install to mitigate silly
   errors that preventing install from completing and leaving a half-installed state.
 - There is a potential issue/limitation with the MacOS configuration source files that

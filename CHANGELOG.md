@@ -30,6 +30,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   from bright red to orange. The bright red was had to see.
 - Updated VNC Tools from from 0.4.1 to 0.5.1.
 - Removed the github configurations from the shared ~/.ssh/config
+- Removed the `kinit -R` command from the `kload` alias since you cannot renew expired
+  tickets. Just running `kinit -ft ${KRB5_KTNAME}` will update the credentials.
 ### Deprecated
 ### Fixed
 - Fixed kerberos issue where homebrew installations change the kerberos commands by
